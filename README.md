@@ -1,2 +1,6 @@
 # qafee__caiK-chenT-jamalK-kimT
-Hello
+<Project Name> by qafee
+Kevin Cai: Project Manager,
+Tammy Chen:
+Kazi Jamal:
+Taejoon Kim:
