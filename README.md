@@ -30,4 +30,4 @@ $ cd <name of cloned directory>
 View the webpage by opening a web browser and visiting: http://127.0.0.1:5000/
 
 ---
-© Copyright 2019 Team bendyStraws -- Kevin Cai, Tammy Chen, Kazi Jamal & Taejoon Kim
+© Copyright 2019 Team qafee -- Kevin Cai, Tammy Chen, Kazi Jamal & Taejoon Kim
