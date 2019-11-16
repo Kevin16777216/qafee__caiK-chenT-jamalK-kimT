@@ -1,0 +1,5 @@
+caiK -- 2019-11-14 14:30
+Team qafee formed, chose Kevin Cai as project manager. Initialized repo, linked submodule.
+
+caiK -- 2019-11-15 20:08
+Added devlog.
