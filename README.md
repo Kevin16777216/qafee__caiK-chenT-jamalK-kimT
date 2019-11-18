@@ -1,9 +1,9 @@
-# ? by Team qafee 
+# Rick and Morty's Minigame Madness by Team qafee 
 ## Roster and Role:
-- Kevin Cai (Project Manager,)
-- Tammy Chen ()
-- Kazi Jamal ()
-- Taejoon Kim ()
+- Kevin Cai (Project Manager, Director of Authentication)
+- Tammy Chen (Intelligence Trivia Agent)
+- Kazi Jamal (Lucky Lotto Manager)
+- Taejoon Kim (Strength Arena Builder)
 
 ## How to Run the Project 
 - We are assuming that the user has installed Python3, pip, and Flask in their environment
