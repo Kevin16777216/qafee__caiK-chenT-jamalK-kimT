@@ -5,6 +5,11 @@
 - Kazi Jamal (Lucky Lotto Manager)
 - Taejoon Kim (Strength Arena Builder)
 
+## What our website does:
+- The overall goal of the project is to create a fun and addictive game for users to play while increasing their stats and building a collection of characters from the television show Rick and Morty. There are multiple minigames to increase stats, including:
+  -Intelligence Trivia
+  -Lucky Lotto
+  -Strength Arena
 ## How to Run the Project 
 - We are assuming that the user has installed Python3, pip, and Flask in their environment
 - If not, install Python3 from https://www.python.org/downloads/
