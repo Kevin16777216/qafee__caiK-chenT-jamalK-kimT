@@ -4,6 +4,5 @@ Team qafee formed, chose Kevin Cai as project manager. Initialized repo, linked 
 caiK -- 2019-11-15 20:08
 Added devlog and gitignore.
 
-
 caiK -- 2019-11-17 23:25
-Added first design document.
+Added first design document, updated README to display roles and summary.
