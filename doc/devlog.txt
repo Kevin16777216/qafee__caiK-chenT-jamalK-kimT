@@ -9,3 +9,6 @@ Added first design document, updated README to display roles and summary.
 
 jamalK -- 2019-11-17 23:27
 Fixed minor error in design.pdf.
+
+jamalK -- 2019-11-18 14:49
+Added base html and app.py files.
