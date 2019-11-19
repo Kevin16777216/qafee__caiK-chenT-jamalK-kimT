@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="my-4 container text-center">
-<h1 class="font-weight-bold">Welcome to your Dashboard</h1>
+<h1>Welcome to your Dashboard</h1>
 {% for message in get_flashed_messages() %}
 <i>{{ message }}</i>
 {% endfor %}
@@ -88,11 +88,11 @@
     <div class="my-2 col-sm">
       <a href="/strength" class="btn btn-danger btn-lg">Strength Arena</a>
     </div>
-  </div>
-  <div class="row">
     <div class="my-2 col-sm">
       <a href="/lotto" class="btn btn-warning btn-lg">Lucky Lotto</a>
     </div>
+  </div>
+  <div class="row">
     <div class="my-2 col-sm">
       <a href="/collection" class="btn btn-primary btn-lg">Character Collection</a>
     </div>
