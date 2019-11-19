@@ -1,3 +1,8 @@
+Team qafee - Kevin Cai, Tammy Chen, Kazi Jamal & Taejoon Kim
+SoftDev1 pd9
+P #01 — ArRESTed Development
+2019-11-14
+
 caiK -- 2019-11-14 14:30
 Team qafee formed, chose Kevin Cai as project manager. Initialized repo, linked submodule.
 
