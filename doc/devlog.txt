@@ -12,3 +12,6 @@ Fixed minor error in design.pdf.
 
 jamalK -- 2019-11-18 14:49
 Added base html and app.py files.
+
+caiK -- 2019-11-18 17:38
+Update design document's component map section to show an actual component map
