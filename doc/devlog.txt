@@ -12,3 +12,6 @@ Fixed minor error in design.pdf.
 
 jamalK -- 2019-11-18 14:49
 Added base html and app.py files.
+
+jamalK -- 209-11-19 12:30
+Added dashboard.html template which is not using jinja yet.

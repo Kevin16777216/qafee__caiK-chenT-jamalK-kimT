@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
 #sets up database
-DB_FILE = "odyssey.db"
+DB_FILE = "rammm.db"
 db = sqlite3.connect(DB_FILE, check_same_thread=False) #open if file exists, otherwise create
 c = db.cursor() #facilitate db operations
 
@@ -86,10 +86,7 @@ def logout():
 
 @app.route("/dashboard")
 def dashboard():
-    if "userID" in session:
-        return render_template('dashboard.html')
-    else:
-        return redirect(url_for('login'))
+    return render_template('dashboard.html')
 
 
 if __name__ == "__main__":
