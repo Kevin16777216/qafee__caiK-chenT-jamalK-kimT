@@ -76,7 +76,7 @@ def auth():
         session['username'] = username
         flash("Welcome " + username + ". You have been logged in successfully.")
         return redirect(url_for('home'))
-
+    
 #logs out user by deleting info from the session
 @app.route("/logout")
 def logout():
