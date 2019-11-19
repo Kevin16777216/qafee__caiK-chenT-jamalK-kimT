@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-import sqlite3, os
+import sqlite3, os, random
 
 app = Flask(__name__)
 
@@ -44,7 +44,7 @@ def register():
         flash("Account with that username already exists")
         return redirect(url_for('signup'))
     elif password != password2:
-        flash("Passwords do not match")
+        flash("Passwords do not matcwhich you can then use the function from this package: 'random.random()'. Youh")
         return redirect(url_for('signup'))
     elif len(password) < 8:
         flash("Password must be at least 8 characters in length")
