@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+import urllib.request as request
+import json
 import sqlite3, os
 
 app = Flask(__name__)
@@ -88,6 +90,21 @@ def logout():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route("/trivia")
+def trivia():
+    return render_template('trivia.html')
+
+@app.route("/strength")
+def strength():
+    return render_template('strength.html')
+
+@app.route("/lotto")
+def lotto():
+    return render_template('lotto.html')
+
+@app.route("/collection")
+def collection():
+    return render_template('collection.html')
 
 if __name__ == "__main__":
     app.debug = True
