@@ -40,5 +40,11 @@ jamalK -- 2019-11-19 21:14
 Changed login.html template to look more like signup.html.
 Removed navbar from base.html and added it to basenav.html, which pages other than login.html and signup.html will extend.
 
+jamalK -- 2019-11-19 13:32
+Added lotto.html template.
+
+jamalK -- 2019-11-19 13:41
+Added requirements.txt.
+
 kimT -- 2019-11-20 13:43
 Added strength.html. Included images into static.
