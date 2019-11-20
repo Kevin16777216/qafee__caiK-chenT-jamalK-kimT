@@ -7,7 +7,7 @@
     {% endblock %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  
+
   <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightgray;">
       <a class="navbar-brand" href="/dashboard">Rick and Morty's Minigame Madness</a>
@@ -30,9 +30,7 @@
             <a class="nav-link" href="/collection">Character Collection</a>
 	  </li>
 	</ul>
-	<form class="form-inline my-2 my-lg-0" action="/logout">
-	  <button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
-	</form>
+  {% block logout %} {% endblock %}
       </div>
     </nav>
   </header>

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "baselogin.html" %}
 
 {% block title %}Dashboard{% endblock %}
 
@@ -13,10 +13,10 @@
 <div id="character" class="my-5 container text-center">
   <div class="row">
     <div class="col-sm">
-      <img src="https://rickandmortyapi.com/api/character/avatar/2.jpeg" width="200" alt="character image" style="border: 8px outset black">
+      <img src={{image}} width="200" alt="character image" style="border: 8px outset black">
     </div>
     <div class="col-sm my-auto">
-      <h1>Morty Smith</h1>
+      <h1>{{name}}</h1>
     </div>
     <div class="col-sm my-auto">
       <img class="d-inline" src="/static/gold.png" width="100" alt="gold">

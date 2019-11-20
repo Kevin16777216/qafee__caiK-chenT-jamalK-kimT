@@ -14,16 +14,16 @@
   <form action="/register" method="POST">
     <div class="form-group">
       <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+      <input type="text" class="form-control" name="username" placeholder="Enter username" required>
     </div>
     <div class="form-row">
       <div class="col">
 	<label for="password">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+      <input type="password" class="form-control" name="password" placeholder="Create a password" required>
       </div>
       <div class="col">
 	<label for="password2">Confirm Password</label>
-	<input type="password" class="form-control" id="password2" placeholder="Confirm your password" required>
+	<input type="password" class="form-control" name="password2" placeholder="Confirm your password" required>
       </div>
     </div>
     <br>
@@ -41,7 +41,7 @@
     </div>
     <div id="starterForm" class="py-3 row">
       <div class="col">
-	<input class="form-check-input" type="radio" name="starterSelect" id="starter1" value="1">
+	<input class="form-check-input" type="radio" name="starterSelect" id="starter1" value="1" required>
 	<label class="form-check-label" for="starter1">Rick Sanchez</label>
       </div>
       <div class="col">
