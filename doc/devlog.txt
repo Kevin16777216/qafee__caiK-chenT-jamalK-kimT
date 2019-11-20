@@ -29,3 +29,9 @@ Updated signup.html template to include choosing starter character, but it does 
 
 chenT -- 2019-11-19 14:59
 Started working on trivia.html and added minigame routes in app.py
+
+caiK -- 2019-11-19 20:38
+Finished login system, started work on dashboard to reflect the user's selected character image and name.
+  -fix bug where you can leave character selection blank
+  -fix bug where 2 accounts are logged in at once
+  -fix logout button showing in login page
