@@ -1,13 +1,15 @@
-{% extends "baselogin.html" %}
+{% extends "basenav.html" %}
 
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
 <div class="my-4 container text-center">
-<h1>Welcome to your Dashboard</h1>
-{% for message in get_flashed_messages() %}
-<i>{{ message }}</i>
-{% endfor %}
+  <h1>Welcome to your Dashboard</h1>
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
 </div>
 
 <div id="character" class="my-5 container text-center">

@@ -3,19 +3,30 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-<h2>Login</h2>
-{% for message in get_flashed_messages() %}
-<i>{{ message }}</i>
-<br>
-{% endfor %}
-<form action="/auth" method="POST">
-  <label for="username">Username</label>
-  <input type="text" name="username" required>
+<div class="my-4 container text-center">
+  <h1 class="font-weight-bold">Rick and Morty's Minigame Madness</h1>
+  <hr>
+  <h2>Log In</h2>
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
+</div>
+
+<div id="loginform" class="container text-center">
+  <form action="/auth" method="POST">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" name="username" placeholder="Enter username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" placeholder="Enter password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+  </form>
   <br>
-  <label for="password">Password</label>
-  <input type="password" name="password" required>
-  <br>
-  <input type="submit" name="login-button" value="Log In">
   <p>Don't have an account? <a href="/signup">Sign Up</a></p>
-</form>
+</div>
 {% endblock %}

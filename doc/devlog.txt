@@ -35,3 +35,7 @@ Finished login system, started work on dashboard to reflect the user's selected 
   -fix bug where you can leave character selection blank
   -fix bug where 2 accounts could be logged in at once
   -fix logout button showing in login page
+
+jamalK -- 2019-11-19 21:14
+Changed login.html template to look more like signup.html.
+Removed navbar from base.html and added it to basenav.html, which pages other than login.html and signup.html will extend.

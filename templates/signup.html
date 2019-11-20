@@ -4,10 +4,14 @@
 
 {% block body %}
 <div class="my-4 container text-center">
-<h1>Sign Up</h1>
-{% for message in get_flashed_messages() %}
-<i>{{ message }}</i>
-{% endfor %}
+  <h1 class="font-weight-bold">Rick and Morty's Minigame Madness</h1>
+  <hr>
+  <h2>Sign Up</h2>
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
 </div>
 
 <div id="registerform" class="container text-center">
@@ -27,7 +31,7 @@
       </div>
     </div>
     <br>
-    <h2>Choose Your Starter Character</h2>
+    <h3>Choose Your Starter Character</h3>
     <div id="starterImg" class="py-3 row">
       <div class="col">
 	<img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" width="200" alt="character image" style="border: 8px outset black">
