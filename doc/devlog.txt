@@ -42,3 +42,6 @@ Removed navbar from base.html and added it to basenav.html, which pages other th
 
 jamalK -- 2019-11-19 13:32
 Added lotto.html template.
+
+jamalK -- 2019-11-19 13:41
+Added requirements.txt.
