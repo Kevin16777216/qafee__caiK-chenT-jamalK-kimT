@@ -69,3 +69,9 @@ Added jinja to dashboard.html to display character stats from database.
 
 jamalK -- 2019-11-21 15:39
 Created /lottoresults route and lottoresults.html template.
+
+chenT -- 2019-11-21 15:00
+Added style.css file and continued to work on trivia.html
+
+chenT -- 2019-11-21 14:23
+Added flag.jpg
