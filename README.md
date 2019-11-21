@@ -11,13 +11,14 @@
   - Lucky Lotto
   - Strength Arena
 ## How to Run the Project 
-- We are assuming that the user has installed Python3, pip, and Flask in their environment
+- We are assuming that the user has installed Python3, pip, and other required packages in their environment
 - If not, install Python3 from https://www.python.org/downloads/
 - pip comes installed with Python by default.
 
-#### Install Flask by running: 
+#### Install all packages by running:
 ```bash
-$ pip3 install flask
+$ cd <name of cloned directory>
+$ pip3 install -r ./doc/requirements.txt
 ```
 
 #### To clone the project: 
