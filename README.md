@@ -20,7 +20,7 @@
   - We use this API for our Intelligence Trivia minigame.
   
 [The SuperHero API] (https://docs.google.com/document/d/1C6-MBqUFIsfcOkAEePMlcC7ywP8SoCNd4RhlKG4zMjk/)
-    - We use this API for our Strength Arena minigame.
+  - We use this API for our Strength Arena minigame.
   
 ## How to Run the Project 
 - We are assuming that the user has installed Python3 and pip in their environment
@@ -41,6 +41,7 @@ $ . ~/<name of virtual environment>/bin/activate
 ```
 
 #### To run the project: 
+Note: No API keys are needed for this project to run, so this should run without any issues.
 ```bash
 $ cd <name of cloned directory>
 /<name of cloned directory>$ python3 app.py 
