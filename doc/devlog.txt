@@ -48,3 +48,7 @@ Added requirements.txt.
 
 kimT -- 2019-11-20 13:43
 Added strength.html. Included images into static.
+
+caiK -- 2019-11-20 23:00
+Moved requirements.txt to /doc/
+Updated README to reflect new way of installing packages.
