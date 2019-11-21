@@ -52,3 +52,12 @@ Added strength.html. Included images into static.
 caiK -- 2019-11-20 23:00
 Moved requirements.txt to /doc/
 Updated README to reflect new way of installing packages.
+
+caiK -- 2019-11-21 06:05
+About Egoless Programming:
+
+Our team found the idea of someone "owning" code very interesting, and due to cognitive dissonance groups can subconsciously end up with worse code if they worked by themselves and lack communication. It's also really interesting the degrees to which programmers can commpletely ignore their problems. To avoid these common pitfalls, we aim to:
+
+- Have someone else in the group look over the code you wrote, then show it to another member
+- Always talk about new ideas with everyone else first, and ask for their feedback, even if you think it's not worth discussing.
+- Not to get too attached to code because it can lead to errors that never get revealed to the rest of the group.
