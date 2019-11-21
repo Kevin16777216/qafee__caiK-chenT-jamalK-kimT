@@ -66,3 +66,6 @@ commpletely ignore their problems. To avoid these common pitfalls, we aim to:
 
 jamalK -- 2019-11-21 12:29
 Added jinja to dashboard.html to display character stats from database.
+
+chenT -- 2019-11-21 14:23
+Added flag.jpg
