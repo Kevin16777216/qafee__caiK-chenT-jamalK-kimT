@@ -1,6 +1,6 @@
 {% extends "basenav.html" %}
 
-{% block title %}Lotto{% endblock %}
+{% block title %}Lotto Results{% endblock %}
 
 {% block body %}
 <div class="my-4 container text-center">
@@ -15,22 +15,28 @@
 
 <div id="lotto" class="my-5 container text-center">
   <div class="alert alert-danger" role="alert">
-    <h1 class="font-weight-bold">🎰 🎰 🎰 BIG WIN 🎰 🎰 🎰</h1>
+    <h1 class="font-weight-bold">
+      {% if isWinner %}
+      🎰 🎰 🎰 YOU WON! 🎰 🎰 🎰
+      {% else %}
+      🎰 🎰 🎰 YOU LOST! 🎰 🎰 🎰
+      {% endif %}
+    </h1>
   </div>
   <div class="row">
     <div class="col-sm">
-	<img class="card-img-top" style="border: black solid 10px; border-radius: 10px;" src="/static/slot.jpg" alt="slot">
+	<img class="card-img-top" style="border: black solid 10px; border-radius: 10px;" src="{{ img1 }}" alt="slot">
     </div>
     <div class="col-sm">
-	<img class="card-img-top" style="border: black solid 10px; border-radius: 10px;" src="/static/slot.jpg" alt="slot">
+	<img class="card-img-top" style="border: black solid 10px; border-radius: 10px;" src="{{ img2 }}" alt="slot">
     </div>
     <div class="col-sm">
-	<img class="card-img-top" style="border: black solid 10px; border-radius: 10px;" src="/static/slot.jpg" alt="slot">
+	<img class="card-img-top" style="border: black solid 10px; border-radius: 10px;" src="{{ img3 }}" alt="slot">
     </div>
   </div>
 </div>
 
 <div class="my-5 container text-center">
-    <a href="/lottoresults" class="btn btn-warning btn-lg">Spend 10 Gold and Spin</a>
+  <a href="/lottoresults" class="btn btn-warning btn-lg">Spend 10 Gold and Spin</a>
 </div>
 {% endblock %}

@@ -96,6 +96,8 @@ def logout():
         session.pop('username')
     return redirect(url_for('root')) # should redirect back to login page
 
+# DASHBOARD
+
 @app.route("/dashboard")
 def dashboard():
     if not "userID" in session:
@@ -103,11 +105,15 @@ def dashboard():
     user = dbfunctions.getUser(c,str(session['userID']))
     return render_template('dashboard.html', name = user[4], image = user[5], xp = user[6], strength = user[7], intelligence = user[8], luck = user[9], gold = user[10])
 
+# TRIVIA MINIGAME
+
 @app.route("/trivia")
 def trivia():
     if not "userID" in session:
         return redirect(url_for('login'))
     return render_template('trivia.html')
+
+# STRENGTH MINIGAME
 
 @app.route("/strength")
 def strength():
@@ -115,11 +121,31 @@ def strength():
         return redirect(url_for('login'))
     return render_template('strength.html')
 
+# LOTTO MINIGAME
+
 @app.route("/lotto")
 def lotto():
     if not "userID" in session:
         return redirect(url_for('login'))
     return render_template('lotto.html')
+
+@app.route("/lottoresults", methods=["POST"])
+def lottoResults():
+    if not "userID" in session:
+        return redirect(url_for('login'))
+    rand1 = random.randint(0, 1)
+    rand2 = random.randint(0, 1)
+    rand3 = random.randint(0, 1)
+    charCount = dbfunctions.getCharCount(c)
+    randCharID1 = random.randint(1, charCount)
+    randCharID2 = random.randint(1, charCount)
+    randCharID3 = random.randint(1, charCount)
+    if rand1 == rand2 == rand3:
+        return render_template('lottoresults.html', charID = randCharID1, img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID1), img3 = dbfunctions.getImage(c, randCharID1), isWinner = True)
+    else:
+        return render_template('lottoresults.html', img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID2), img3 = dbfunctions.getImage(c, randCharID3), isWinner = False)
+
+# COLLECTION
 
 @app.route("/collection")
 def collection():
