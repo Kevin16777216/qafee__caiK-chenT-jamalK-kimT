@@ -18,7 +18,7 @@
 #### Install all packages by running:
 ```bash
 $ cd <name of cloned directory>
-$ pip3 install -r ./doc/requirements.txt
+/<name of cloned directory>$ pip3 install -r ./doc/requirements.txt
 ```
 
 #### To clone the project: 
