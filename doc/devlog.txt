@@ -63,3 +63,6 @@ commpletely ignore their problems. To avoid these common pitfalls, we aim to:
   - Have someone else in the group look over the code you wrote, then show it to another member
   - Always talk about new ideas with everyone else first, and ask for their feedback, even if you think it's not worth discussing.
   - Not to get too attached to code because it can lead to errors that never get revealed to the rest of the group.
+
+jamalK -- 2019-11-21 12:29
+Added jinja to dashboard.html to display character stats from database.

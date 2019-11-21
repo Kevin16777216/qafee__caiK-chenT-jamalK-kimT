@@ -101,9 +101,7 @@ def dashboard():
     if not "userID" in session:
         return redirect(url_for('login'))
     user = dbfunctions.getUser(c,str(session['userID']))
-    charName = user[4]
-    charPic = user[5]
-    return render_template('dashboard.html',name = charName, image = charPic)
+    return render_template('dashboard.html', name = user[4], image = user[5], xp = user[6], strength = user[7], intelligence = user[8], luck = user[9], gold = user[10])
 
 @app.route("/trivia")
 def trivia():
