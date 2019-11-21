@@ -10,22 +10,24 @@
   - Intelligence Trivia
   - Lucky Lotto
   - Strength Arena
+  
 ## How to Run the Project 
-- We are assuming that the user has installed Python3, pip, and other required packages in their environment
+- We are assuming that the user has installed Python3 and pip in their environment
 - If not, install Python3 from https://www.python.org/downloads/
-- pip comes installed with Python by default.
-
-#### Install all packages by running:
-```bash
-$ cd <name of cloned directory>
-/<name of cloned directory>$ pip3 install -r ./doc/requirements.txt
-```
+- pip comes installed with Python by default
 
 #### To clone the project: 
 ```bash
 $ git clone git@github.com:kevin16777216/qafee__caiK-chenT-jamalK-kimT.git
 ```
 
+#### To create a virtual environment and install all packages in the virtual environment:
+```bash
+$ python3 -m venv <name of virtual environment>
+$ . ~/<name of virtual environment>/bin/activate  
+(venv)$ cd <name of cloned directory>
+(venv)/<name of cloned directory>$ pip3 install -r doc/requirements.txt
+```
 
 #### To run the project: 
 ```bash
