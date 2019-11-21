@@ -12,7 +12,7 @@
   - Strength Arena
 ## What APIs we are going to use (and how we plan to use them)
 - We use three differing APIs:
-  - The Rick and Morty API: [Check it out here] (https://docs.google.com/document/d/1C6-MBqUFIsfcOkAEePMlcC7ywP8SoCNd4RhlKG4zMjk )
+  - The Rick and Morty API: [Check it out here]: (https://docs.google.com/document/d/1C6-MBqUFIsfcOkAEePMlcC7ywP8SoCNd4RhlKG4zMjk )
     - We use this API to get the images and names of our characters for our dashboard and lucky lotto minigame.
   - The Open Trivia API: [Check it out here] (https://docs.google.com/document/d/1yp2nicOExDYlrEfdvqspD17Kz5c-xMSWHudfmNjJgQ4)
     - We use this API for our Intelligence  
