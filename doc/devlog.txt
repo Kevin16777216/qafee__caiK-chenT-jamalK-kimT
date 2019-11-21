@@ -69,3 +69,6 @@ Added jinja to dashboard.html to display character stats from database.
 
 chenT -- 2019-11-21 14:23
 Added flag.jpg
+
+chenT -- 2019-11-21 15:00
+Added style.css file and continued to work on trivia.html
