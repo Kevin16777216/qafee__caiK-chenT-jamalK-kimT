@@ -50,7 +50,7 @@ def register():
         flash("Account with that username already exists")
         return redirect(url_for('signup'))
     elif password != password2:
-        flash("Passwords do not matcwhich you can then use the function from this package: 'random.random()'. Youh")
+        flash("Passwords do not match")
         return redirect(url_for('signup'))
     elif len(password) < 8:
         flash("Password must be at least 8 characters in length")
@@ -141,10 +141,22 @@ def lottoResults():
     randCharID1 = random.randint(1, charCount)
     randCharID2 = random.randint(1, charCount)
     randCharID3 = random.randint(1, charCount)
+    charName = dbfunctions.getName(c, randCharID1)
     if rand1 == rand2 == rand3:
-        return render_template('lottoresults.html', charID = randCharID1, img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID1), img3 = dbfunctions.getImage(c, randCharID1), isWinner = True)
+        return render_template('lottoresults.html', charID = randCharID1, charName = charName, img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID1), img3 = dbfunctions.getImage(c, randCharID1), isWinner = True)
     else:
         return render_template('lottoresults.html', img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID2), img3 = dbfunctions.getImage(c, randCharID3), isWinner = False)
+
+@app.route("/lottoswitch", methods=["POST"])
+def lottoSwitch():
+    charID = request.form['charID']
+    charName = request.form['charName']
+    charImg = request.form['charImg']
+    dbfunctions.addChar(c, session['userID'], charID, charName, charImg)
+    dbfunctions.switchChar(c, session['userID'], charID, charName, charImg)
+    db.commit()
+    user = dbfunctions.getUser(c,str(session['userID']))
+    return render_template('dashboard.html', name = user[4], image = user[5], xp = user[6], strength = user[7], intelligence = user[8], luck = user[9], gold = user[10])
 
 # COLLECTION
 

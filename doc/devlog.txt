@@ -75,3 +75,6 @@ Added style.css file and continued to work on trivia.html
 
 jamalK -- 2019-11-21 15:39
 Created /lottoresults route and lottoresults.html template.
+
+jamalK -- 2019-11-21 14:49
+Updated /lottoresults route with actions for winner or loser.
