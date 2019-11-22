@@ -10,19 +10,18 @@
   - Intelligence Trivia
   - Lucky Lotto
   - Strength Arena
-## What APIs we are going to use (and how we plan to use them)
-- We use three differing APIs:
 
+## APIs utilized:
 [The Rick and Morty API](https://docs.google.com/document/d/1oK0klhp__LHP9kxb3D70cbbI46i1mMnmDMI4y1XS3B4/)
-  - We use this API to get the images and names of our characters for our dashboard and lucky lotto minigame.
+  - We use this API to get the images and names of our characters for our Dashboard page and Lucky Lotto minigame.
 
 [The Open Trivia API](https://docs.google.com/document/d/1yp2nicOExDYlrEfdvqspD17Kz5c-xMSWHudfmNjJgQ4/)
-  - We use this API for our Intelligence Trivia minigame.
+  - We use this API to generate trivia questions for our Intelligence Trivia minigame.
   
 [The SuperHero API](https://docs.google.com/document/d/1C6-MBqUFIsfcOkAEePMlcC7ywP8SoCNd4RhlKG4zMjk/)
-  - We use this API for our Strength Arena minigame.
+  - We use this API to generate the images and names of enemy characters for our Strength Arena minigame.
   
-## How to Run the Project 
+## How to Run the Project:
 - We are assuming that the user has installed Python3 and pip in their environment
 - If not, install Python3 from https://www.python.org/downloads/
 - pip comes installed with Python by default
