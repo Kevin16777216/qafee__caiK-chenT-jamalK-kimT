@@ -119,7 +119,8 @@ def trivia():
 def strength():
     if not "userID" in session:
         return redirect(url_for('login'))
-    return render_template('strength.html')
+    user = dbfunctions.getUser(c,str(session['userID']))
+    return render_template('strength.html', image = user[5], name = user[4])
 
 # LOTTO MINIGAME
 
@@ -151,7 +152,8 @@ def lottoResults():
 def collection():
     if not "userID" in session:
         return redirect(url_for('login'))
-    return render_template('collection.html')
+    usernameCurrent = session['username']
+    return render_template('collection.html', username = usernameCurrent)
 
 if __name__ == "__main__":
     app.debug = True
