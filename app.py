@@ -129,14 +129,16 @@ def lotto():
         return redirect(url_for('login'))
     return render_template('lotto.html')
 
-@app.route("/lottoresults", methods=["POST"])
+@app.route("/lottoresults")
 def lottoResults():
     if not "userID" in session:
         return redirect(url_for('login'))
+    print("start")
     rand1 = random.randint(0, 1)
     rand2 = random.randint(0, 1)
     rand3 = random.randint(0, 1)
     charCount = dbfunctions.getCharCount(c)
+    print("done")
     randCharID1 = random.randint(1, charCount)
     randCharID2 = random.randint(1, charCount)
     randCharID3 = random.randint(1, charCount)

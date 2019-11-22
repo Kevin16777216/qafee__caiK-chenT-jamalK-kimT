@@ -1,0 +1,18 @@
+{% extends "basenav.html" %}
+
+{% block title %}Character Collection{% endblock %}
+
+{% block body %}
+<div class="my-4 container text-center">
+  <h1>Character Collection</h1>
+  <p class="lead">Here lies all the characters you have collected</p>
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
+</div>
+
+<div id="collection" class="my-5 container text-center">
+</div>
+{% endblock %}
