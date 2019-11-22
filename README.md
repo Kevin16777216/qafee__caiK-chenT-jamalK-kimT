@@ -16,10 +16,10 @@
   - We use this API to get the images and names of our characters for our Dashboard page and Lucky Lotto minigame.
 
 [The Open Trivia API](https://docs.google.com/document/d/1yp2nicOExDYlrEfdvqspD17Kz5c-xMSWHudfmNjJgQ4/)
-  - We use this API to generate trivia questions for our Intelligence Trivia minigame.
+  - We use this API to get trivia questions for our Intelligence Trivia minigame.
   
 [The SuperHero API](https://docs.google.com/document/d/1C6-MBqUFIsfcOkAEePMlcC7ywP8SoCNd4RhlKG4zMjk/)
-  - We use this API to generate the images and names of enemy characters for our Strength Arena minigame.
+  - We use this API to get the images and names of enemy characters for our Strength Arena minigame.
   
 ## How to Run the Project:
 - We are assuming that the user has installed Python3 and pip in their environment
