@@ -152,8 +152,7 @@ def lottoResults():
 def collection():
     if not "userID" in session:
         return redirect(url_for('login'))
-    usernameCurrent = session['username']
-    return render_template('collection.html', username = usernameCurrent)
+    return render_template('collection.html')
 
 if __name__ == "__main__":
     app.debug = True
