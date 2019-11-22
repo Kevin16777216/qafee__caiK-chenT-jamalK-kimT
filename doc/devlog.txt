@@ -78,3 +78,6 @@ Created /lottoresults route and lottoresults.html template.
 
 jamalK -- 2019-11-21 14:49
 Updated /lottoresults route with actions for winner or loser.
+
+kimT -- 2019-11-22 13:51
+Added extra buttons and images in strength.html.
