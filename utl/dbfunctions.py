@@ -17,8 +17,10 @@ def createUser(c, username, password, charID):
     c.execute('INSERT INTO users VALUES (NULL, ?, ?, ?, ?, ?, 0, 0, 0, 0, 50)', (username, password, int(charID), name, image))
     id = getUserIDByUsername(c,username)
     c.execute('INSERT INTO characters VALUES (?, ?, ?, ?)', (id, int(charID), name,image))
+    
 def getUserIDByUsername(c,username):
     return c.execute("SELECT userID FROM users WHERE username = ?", (username, )).fetchone()[0]
+
 def getUser(c,userID):
     return c.execute("SELECT * FROM users WHERE userID = " + userID).fetchone()
 
@@ -48,9 +50,15 @@ def switchChar(c, userID, charID, charName, charImg):
     c.execute('UPDATE users SET charID = ?, charName = ?, charImg = ? WHERE userID = ?', (charID, charName, charImg, userID))
 
 ## RETURN ALL STATS - return dictionary of stats
-def returnStats(c, userID):
-    return None
+def getStats(c, userID):
+    c.execute('SELECT xp, strength, intelligence, luck, gold FROM users WHERE userID = ?', (userID,))
+    stats = c.fetchone()
+    statDict = {'xp': stats[0], 'intelligence': stats[1], 'luck': stats[2], 'luck': stats[3], 'gold': stats[4]}
+    return statDict
 
 ## UPDATE STATS
-def updateStats(c, userID, xp, strength, intelligence, luck, gold):
-    return None
+def updateStats(c, userID, **stats):
+    currStats = getStats(c, userID)
+    for key, value in stats.items():
+        newValue = currStats[key] + value
+        c.execute('UPDATE users SET {} = ? WHERE userID = ?'.format(key), (newValue, userID))

@@ -134,6 +134,12 @@ def lotto():
 def lottoResults():
     if not "userID" in session:
         return redirect(url_for('login'))
+    userID = session['userID']
+    if dbfunctions.getStats(c, userID)['gold'] < 10:
+        flash("You do not have enough gold!")
+        return redirect(url_for('dashboard'))
+    dbfunctions.updateStats(c, userID, gold = -10)
+    db.commit()
     rand1 = random.randint(0, 1)
     rand2 = random.randint(0, 1)
     rand3 = random.randint(0, 1)
@@ -149,14 +155,24 @@ def lottoResults():
 
 @app.route("/lottoswitch", methods=["POST"])
 def lottoSwitch():
+    userID = session['userID']
     charID = request.form['charID']
     charName = request.form['charName']
     charImg = request.form['charImg']
-    dbfunctions.addChar(c, session['userID'], charID, charName, charImg)
-    dbfunctions.switchChar(c, session['userID'], charID, charName, charImg)
+    dbfunctions.addChar(c, userID, charID, charName, charImg)
+    dbfunctions.switchChar(c, userID, charID, charName, charImg)
+    dbfunctions.updateStats(c, userID, luck = 5, xp = 25)
     db.commit()
-    user = dbfunctions.getUser(c,str(session['userID']))
-    return render_template('dashboard.html', name = user[4], image = user[5], xp = user[6], strength = user[7], intelligence = user[8], luck = user[9], gold = user[10])
+    stats = dbfunctions.getStats(c, userID)
+    return render_template("lottoswitch.html", charName = charName, charImg = charImg, luck = stats['luck'], xp = stats['xp'])
+
+@app.route("/lottogold")
+def lottoGold():
+    userID = session['userID']
+    dbfunctions.updateStats(c, userID, gold = 50, luck = 5, xp = 25)
+    db.commit()
+    stats = dbfunctions.getStats(c, userID)
+    return render_template("lottogold.html", gold = stats['gold'], luck = stats['luck'], xp = stats['xp'])
 
 # COLLECTION
 

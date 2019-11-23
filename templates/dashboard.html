@@ -1,8 +1,5 @@
-{% extends "basenav.html" %}
-
-{% block title %}Dashboard{% endblock %}
-
-{% block body %}
+{% extends "basenav.html" %} {% block title %}Dashboard{% endblock %} {% block
+body %}
 <div class="my-4 container text-center">
   <h1>Welcome to your Dashboard</h1>
   {% for message in get_flashed_messages() %}
@@ -15,13 +12,18 @@
 <div id="character" class="my-5 container text-center">
   <div class="row">
     <div class="col-sm">
-      <img src={{image}} width="200" alt="character image" style="border: 8px outset black">
+      <img
+        src="{{image}}"
+        width="200"
+        alt="character image"
+        style="border: 8px outset black"
+      />
     </div>
     <div class="col-sm my-auto">
       <h1>{{name}}</h1>
     </div>
     <div class="col-sm my-auto">
-      <img class="d-inline" src="/static/gold.png" width="100" alt="gold">
+      <img class="d-inline" src="/static/gold.png" width="100" alt="gold" />
       <h1 class="d-inline">{{ gold }}</h1>
     </div>
   </div>
@@ -34,7 +36,14 @@
     </div>
     <div class="col-sm-7 pt-2">
       <div class="progress">
-	<div class="progress-bar bg-success" role="progressbar" style="width: {{ intelligence/20*100 }}%" aria-valuenow="{{ intelligence }}" aria-valuemin="0" aria-valuemax="20"></div>
+        <div
+          class="progress-bar bg-success"
+          role="progressbar"
+          style="width: {{ intelligence }}%"
+          aria-valuenow="{{ intelligence }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
       </div>
     </div>
     <div class="col-sm-2">
@@ -47,7 +56,14 @@
     </div>
     <div class="col-sm-7 pt-2">
       <div class="progress">
-	<div class="progress-bar bg-danger" role="progressbar" style="width: {{ strength/20*100 }}%" aria-valuenow="{{ strength }}" aria-valuemin="0" aria-valuemax="20"></div>
+        <div
+          class="progress-bar bg-danger"
+          role="progressbar"
+          style="width: {{ strength }}%"
+          aria-valuenow="{{ strength }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
       </div>
     </div>
     <div class="col-sm-2">
@@ -60,7 +76,14 @@
     </div>
     <div class="col-sm-7 pt-2">
       <div class="progress">
-	<div class="progress-bar bg-warning" role="progressbar" style="width: {{ luck/20*100 }}%" aria-valuenow="{{ luck }}" aria-valuemin="0" aria-valuemax="20"></div>
+        <div
+          class="progress-bar bg-warning"
+          role="progressbar"
+          style="width: {{ luck }}%"
+          aria-valuenow="{{ luck }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
       </div>
     </div>
     <div class="col-sm-2">
@@ -73,7 +96,14 @@
     </div>
     <div class="col-sm-7 pt-2">
       <div class="progress">
-	<div class="progress-bar bg-primary progress-bar-striped" role="progressbar" style="width: {{ (xp%100) | int }}%" aria-valuenow="{{ (xp%100) | int}}" aria-valuemin="0" aria-valuemax="100"></div>
+        <div
+          class="progress-bar bg-primary progress-bar-striped"
+          role="progressbar"
+          style="width: {{ (xp%100) | int }}%"
+          aria-valuenow="{{ (xp%100) | int}}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
       </div>
     </div>
     <div class="col-sm-2">
@@ -96,7 +126,9 @@
   </div>
   <div class="row">
     <div class="my-2 col-sm">
-      <a href="/collection" class="btn btn-primary btn-lg">Character Collection</a>
+      <a href="/collection" class="btn btn-primary btn-lg"
+        >Character Collection</a
+      >
     </div>
   </div>
 </div>
