@@ -5,12 +5,6 @@
 {% block body %}
 <div class="my-4 container text-center">
   <h1>Lucky Lotto</h1>
-  <p class="lead">Spend 10 gold to get a chance at earning a new character and increasing your luck stat</p>
-  {% for message in get_flashed_messages() %}
-  <div class="alert alert-warning" role="alert">
-    {{ message }}
-  </div>
-  {% endfor %}
 </div>
 
 <div id="lotto" class="my-5 container text-center">
@@ -46,7 +40,9 @@
     <button type="submit" class="btn btn-primary btn-lg">Switch Character to {{ charName }}</button>
   </form>
   <br>
-  <a href="/lottogold" class="btn btn-warning btn-lg">Take 50 Gold Instead</a>
+  <form action="/lottogold" method="POST">
+    <button type="submit" class="btn btn-warning btn-lg">Take 50 Gold Instead</button>
+  </form>
 </div>
 {% else %}
 <div class="my-5 container text-center">

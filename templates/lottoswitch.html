@@ -2,11 +2,6 @@
 block body %}
 <div class="my-4 container text-center">
   <h1>Lucky Lotto</h1>
-  {% for message in get_flashed_messages() %}
-  <div class="alert alert-warning" role="alert">
-    {{ message }}
-  </div>
-  {% endfor %}
 </div>
 
 <div id="results" class="my-5 container text-center">
