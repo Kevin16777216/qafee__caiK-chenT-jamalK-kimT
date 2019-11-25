@@ -53,7 +53,7 @@ def switchChar(c, userID, charID, charName, charImg):
 def getStats(c, userID):
     c.execute('SELECT xp, strength, intelligence, luck, gold FROM users WHERE userID = ?', (userID,))
     stats = c.fetchone()
-    statDict = {'xp': stats[0], 'intelligence': stats[1], 'luck': stats[2], 'luck': stats[3], 'gold': stats[4]}
+    statDict = {'xp': stats[0], 'strength': stats[1], 'intelligence': stats[2], 'luck': stats[3], 'gold': stats[4]}
     return statDict
 
 ## UPDATE STATS

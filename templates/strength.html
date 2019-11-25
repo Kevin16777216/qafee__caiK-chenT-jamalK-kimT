@@ -37,7 +37,7 @@
 <div id="rock paper scissors" class="container float-center">
   <div class="row">
     <div class="col">
-    <form action="/strengthresults">
+    <form action="/strengthresults" method="POST">
       <input type="hidden" name="rpc" value="1">
       <button class="btn btn-danger border-0 rounded-circle" type="submit" name="submit">
         <img src="static/rock.png" width="200" alt="Rock">
@@ -45,7 +45,7 @@
     </form>
     </div>
     <div class="col">
-    <form action="/strengthresults">
+    <form action="/strengthresults" method="POST">
       <input type="hidden" name="rpc" value="2">
       <button class="btn btn-warning border-0 rounded-circle" type="submit" name="submit">
         <img src="static/paper.png" width="200" alt="Paper">
@@ -53,7 +53,7 @@
     </form>
     </div>
     <div class="col">
-    <form action="/strengthresults">
+    <form action="/strengthresults" method="POST">
       <input type="hidden" name="rpc" value="3">
       <button class="btn btn-info border-0 rounded-circle" type="submit" name="submit">
         <img src="static/scissors.png" width="200" alt="Scissors">

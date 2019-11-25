@@ -168,9 +168,9 @@ def strength():
     hName = dbfunctions.getHeroName(c, randHeroID)
     return render_template('strength.html', image = user[5], name = user[4], heroImage = hImage, heroName = hName)
 
-@app.route("/strengthresults")
+@app.route("/strengthresults", methods = ["POST"])
 @login_required
-def strengthresult():
+def strengthresults():
     userID = session['userID']
     user = dbfunctions.getUser(c,str(userID))
     global randHeroID
