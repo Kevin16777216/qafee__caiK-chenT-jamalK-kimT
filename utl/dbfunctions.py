@@ -63,6 +63,13 @@ def updateStats(c, userID, **stats):
         newValue = currStats[key] + value
         c.execute('UPDATE users SET {} = ? WHERE userID = ?'.format(key), (newValue, userID))
 
+## RETURN ALL CHARACTERS - return dictionary of images
+def getCharacters(c, userID):
+    c.execute('SELECT charImg FROM users WHERE userID = ?', (userID,))
+    stats = c.fetchall()
+    out = stats
+    return out
+
 ## GET A HERO IMAGE
 def getHeroImage(c, charID):
     req = request.Request('https://www.superheroapi.com/api.php/2503373653110667/'+str(charID), headers={'User-Agent': 'Mozilla/5.0'})
