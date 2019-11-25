@@ -208,7 +208,7 @@ def lottoGold():
 @app.route("/collection")
 @login_required
 def collection():
-    return render_template('collection.html')
+    return render_template('collection.html', characters = dbfunctions.getCharacters(c,session['userID']))
 
 if __name__ == "__main__":
     app.debug = True

@@ -9,5 +9,8 @@
 </div>
 
 <div id="collection" class="my-5 container text-center">
+  {% for character in characters %}
+  <img class="d-inline" src = {{character}} width="200" alt="character image" style="border: 8px outset black" />
+  {% endfor %}
 </div>
 {% endblock %}
