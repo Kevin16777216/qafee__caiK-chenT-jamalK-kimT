@@ -1,44 +1,23 @@
 {% extends "basenav.html" %}
 
 {% block body %}
-<<<<<<< HEAD
   <h1 class="bg-info text-center">Intelligence Trivia</h1>
   <div class="instruction">
     <p class="text-center"> Get 1 gold for every question answered correctly, and increase your intelligence stat </p>
-  <form>
-    { % for i in range(11) %}
+    <div class = "form-group">
+      <form action='/quiz' method='POST'>
+        <ol>
+          {% for i in q %}
+              <li>{{i}}</li>
+              {% for j in o[i] %}
+                  <br><input type='radio' value='{{j}}' name= {{i}}' />{{j}}
+              {% endfor %}
 
-      {
-          <div class="form-group">
-            <label for = "one"> Question i </label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Option 1
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Option 2
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Option 3
-              </label>
-            </div>
-          </div>
-      }
-      {% endfor %}
-    <button type="submit"> Submit </button>
+          {% endfor %}
+          <br>
+        </ol>
+        <input type="submit" value="submit" />
+      </form>
+    </div>
 
-  </form>
-=======
-<h1 class="bg-info text-center">Intelligence Trivia</h1>
-<div class="instruction text-center">
-  <p> Get 1 gold for every question answered correctly, and increase your intelligence stat </p>
-</div>
->>>>>>> 50b1815121b6537393526b59995349ccbc573ca6
 {% endblock %}
