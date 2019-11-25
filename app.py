@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from functools import wraps
 import urllib.request as urlrequest
 import json
-import sqlite3, os, random
+import sqlite3, os, random, copy
 import utl.dbfunctions as dbfunctions
 app = Flask(__name__)
 
@@ -116,11 +116,45 @@ def dashboard():
     return render_template('dashboard.html', name = user[4], image = user[5], xp = user[6], strength = user[7], intelligence = user[8], luck = user[9], gold = user[10])
 
 # TRIVIA MINIGAME
+original_questions = {
+ #Format is 'question':[options]
+ 'The programming language Swift was created to replace what other programming language?':['Objective-C','Ruby','Java','C++'],
+ 'On which computer hardware device is the BIOS chip located?':['Motherboard','Hard Disk Drive','Central Processing Unit','Graphics Processing Unit'],
+ 'In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?':['Final','Static','Private','Public'],
+
+}
+
+questions = copy.deepcopy(original_questions)
+
+def shuffle(q):
+ """
+ This function is for shuffling
+ the dictionary elements.
+ """
+ selected_keys = []
+ i = 0
+ while i < len(q):
+  current_selection = random.choice(list(q.keys()))
+  if current_selection not in selected_keys:
+   selected_keys.append(current_selection)
+   i += 1
+ return selected_keys
 
 @app.route("/trivia")
-@login_required
 def trivia():
-    return render_template('trivia.html')
+ questions_shuffled = shuffle(questions)
+ for i in questions.keys():
+  random.shuffle(questions[i])
+ return render_template('trivia.html', q = questions_shuffled, o = questions)
+
+@app.route('/quiz', methods=['POST'])
+def quiz_answers():
+ correct = 0
+ for i in questions.keys():
+  answered = request.form[i]
+  if original_questions[i][0] == answered:
+   correct += 1
+ return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
 
 # STRENGTH MINIGAME
 randHeroID = 0
@@ -204,7 +238,6 @@ def lottoGold():
     return render_template("lottogold.html", gold = stats['gold'], luck = stats['luck'], xp = stats['xp'])
 
 # COLLECTION
-
 @app.route("/collection")
 @login_required
 def collection():
