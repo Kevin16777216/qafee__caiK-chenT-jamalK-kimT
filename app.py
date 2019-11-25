@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from functools import wraps
 import urllib.request as urlrequest
 import json
 import sqlite3, os, random
@@ -13,6 +14,15 @@ DB_FILE = "rammm.db"
 db = sqlite3.connect(DB_FILE, check_same_thread=False) #open if file exists, otherwise create
 c = db.cursor() #facilitate db operations
 dbfunctions.createTables(c)
+
+#decorator that redirects user to login page if not logged in
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "userID" not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route("/")
 def root():
@@ -47,26 +57,26 @@ def register():
     c.execute("SELECT username FROM users WHERE username = ?", (username, ))
     a = c.fetchone()
     if a != None:
-        flash("Account with that username already exists")
+        flash("Account with that username already exists", "error")
         return redirect(url_for('signup'))
     elif password != password2:
-        flash("Passwords do not matcwhich you can then use the function from this package: 'random.random()'. Youh")
+        flash("Passwords do not match", "error")
         return redirect(url_for('signup'))
     elif len(password) < 8:
-        flash("Password must be at least 8 characters in length")
+        flash("Password must be at least 8 characters in length", "error")
         return redirect(url_for('signup'))
 
     else:
         dbfunctions.createUser(c,username,password,character)
         db.commit()
-        flash("Successfuly created user")
+        flash("Successfuly created user", "success")
         return redirect(url_for('login'))
 
 #authenticates user upon a login attempt
 @app.route("/auth", methods=["POST"])
 def auth():
     if "userID" in session:
-        flash("You were already logged in, "+session['username']+".")
+        flash("You were already logged in, "+session['username']+".", "error")
         return redirect(url_for('dashboard'))
     # information inputted into the form by the user
     username = request.form['username']
@@ -75,64 +85,67 @@ def auth():
     c.execute("SELECT userID, password FROM users WHERE username = ?", (username, ))
     a = c.fetchone()
     if a == None: # if username not found
-        flash("No user found with given username")
+        flash("No user found with given username", "error")
         return redirect(url_for('login'))
     elif password != a[1]: # if password is incorrect
-        flash("Incorrect password")
+        flash("Incorrect password", "error")
         return redirect(url_for('login'))
     else: # hooray! the username and password are both valid
         session['userID'] = a[0]
         session['username'] = username
-        flash("Welcome " + username + ". You have been logged in successfully.")
+        flash("Welcome " + username + ". You have been logged in successfully.", "success")
         return redirect(url_for('dashboard'))
 
 #logs out user by deleting info from the session
 @app.route("/logout")
 def logout():
     if not "userID" in session:
-        flash("Already logged out, no need to log out again")
+        flash("Already logged out, no need to log out again", "error")
     else:
         session.pop('userID')
         session.pop('username')
+        flash("Successfuly logged out", "success")
     return redirect(url_for('root')) # should redirect back to login page
 
 # DASHBOARD
 
 @app.route("/dashboard")
+@login_required
 def dashboard():
-    if not "userID" in session:
-        return redirect(url_for('login'))
     user = dbfunctions.getUser(c,str(session['userID']))
     return render_template('dashboard.html', name = user[4], image = user[5], xp = user[6], strength = user[7], intelligence = user[8], luck = user[9], gold = user[10])
 
 # TRIVIA MINIGAME
 
 @app.route("/trivia")
+@login_required
 def trivia():
-    if not "userID" in session:
-        return redirect(url_for('login'))
     return render_template('trivia.html')
 
 # STRENGTH MINIGAME
 
 @app.route("/strength")
+@login_required
 def strength():
-    if not "userID" in session:
-        return redirect(url_for('login'))
-    return render_template('strength.html')
+    user = dbfunctions.getUser(c,str(session['userID']))
+    return render_template('strength.html', image = user[5], name = user[4])
 
 # LOTTO MINIGAME
 
 @app.route("/lotto")
+@login_required
 def lotto():
-    if not "userID" in session:
-        return redirect(url_for('login'))
     return render_template('lotto.html')
 
 @app.route("/lottoresults")
+@login_required
 def lottoResults():
-    if not "userID" in session:
-        return redirect(url_for('login'))
+    userID = session['userID']
+    if dbfunctions.getStats(c, userID)['gold'] < 10:
+        flash("You do not have enough gold!")
+        return redirect(url_for('dashboard'))
+    dbfunctions.updateStats(c, userID, gold = -10)
+    db.commit()
     rand1 = random.randint(0, 1)
     rand2 = random.randint(0, 1)
     rand3 = random.randint(0, 1)
@@ -140,17 +153,40 @@ def lottoResults():
     randCharID1 = random.randint(1, charCount)
     randCharID2 = random.randint(1, charCount)
     randCharID3 = random.randint(1, charCount)
+    charName = dbfunctions.getName(c, randCharID1)
     if rand1 == rand2 == rand3:
-        return render_template('lottoresults.html', charID = randCharID1, img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID1), img3 = dbfunctions.getImage(c, randCharID1), isWinner = True)
+        return render_template('lottoresults.html', charID = randCharID1, charName = charName, img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID1), img3 = dbfunctions.getImage(c, randCharID1), isWinner = True)
     else:
         return render_template('lottoresults.html', img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID2), img3 = dbfunctions.getImage(c, randCharID3), isWinner = False)
+
+@app.route("/lottoswitch", methods=["POST"])
+@login_required
+def lottoSwitch():
+    userID = session['userID']
+    charID = request.form['charID']
+    charName = request.form['charName']
+    charImg = request.form['charImg']
+    dbfunctions.addChar(c, userID, charID, charName, charImg)
+    dbfunctions.switchChar(c, userID, charID, charName, charImg)
+    dbfunctions.updateStats(c, userID, luck = 5, xp = 25)
+    db.commit()
+    stats = dbfunctions.getStats(c, userID)
+    return render_template("lottoswitch.html", charName = charName, charImg = charImg, luck = stats['luck'], xp = stats['xp'])
+
+@app.route("/lottogold", methods=["POST"])
+@login_required
+def lottoGold():
+    userID = session['userID']
+    dbfunctions.updateStats(c, userID, gold = 50, luck = 5, xp = 25)
+    db.commit()
+    stats = dbfunctions.getStats(c, userID)
+    return render_template("lottogold.html", gold = stats['gold'], luck = stats['luck'], xp = stats['xp'])
 
 # COLLECTION
 
 @app.route("/collection")
+@login_required
 def collection():
-    if not "userID" in session:
-        return redirect(url_for('login'))
     return render_template('collection.html')
 
 if __name__ == "__main__":

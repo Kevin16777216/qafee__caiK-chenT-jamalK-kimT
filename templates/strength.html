@@ -3,19 +3,42 @@
 {% block title %}Strength Arena{% endblock %}
 
 {% block body %}
-<div class="container text-center">
+<div id="title block" class="container text-center">
   <br>
-  <h1 class="d-inline bg-danger px-3">Strength Arena</h1>
+  <h1 class="d-inline bg-danger px-3 rounded">Strength Arena</h1>
   <br>
 </div>
 
-<div class="container float-center">
+<br>
+<br>
+
+<div id="versus" class="container float-center text-center">
   <div class="row">
     <div class="col">
-      
+      <img src={{image}} width="200" alt="Picture of {{name}}" style="border: 8px outset black">
+      <br>
+      <h3>{{name}}</h3>
     </div>
     <div class="col">
 
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div id="rock paper scissors" class="container float-center">
+  <div class="row">
+    <div class="col">
+      <button type="button" name="button">
+        <img src="static/rock.png" width="200" alt="Rock">
+      </button>
+    </div>
+    <div class="col">
+      <img src="static/paper.png" width="200" alt="Paper">
+    </div>
+    <div class="col">
+      <img src="static/scissors.png" width="200" alt="Scissors">
     </div>
   </div>
 </div>

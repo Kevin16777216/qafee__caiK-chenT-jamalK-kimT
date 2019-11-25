@@ -75,3 +75,18 @@ Added style.css file and continued to work on trivia.html
 
 jamalK -- 2019-11-21 15:39
 Created /lottoresults route and lottoresults.html template.
+
+jamalK -- 2019-11-22 14:49
+Updated /lottoresults route with actions for winner or loser.
+
+kimT -- 2019-11-22 13:51
+Added extra buttons and images in strength.html.
+
+jamalK -- 2019-11-23 14:06
+Updated /lottoresults, /lottoswitch, and /lottogold routes.
+Lucky Lotto is now fully functional, still need to implement security to prevent refreshing these routes and increasing stats.
+
+jamalK -- 2019-11-24 15:01
+Added login_required decorator in app.py.
+Modified app.py to add categories "error" and "success" to flashed messages.
+Modified base.html to change alert color based on flashed message category and made alerts dismissable.
