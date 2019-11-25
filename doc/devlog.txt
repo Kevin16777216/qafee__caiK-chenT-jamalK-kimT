@@ -97,3 +97,6 @@ Added strengthresults.html; still needs some adjustments.
 
 jamalK -- 2019-11-25 12:00
 Linked style.css stylesheet in base.html.
+
+chenT -- 2019-11-2019 13:19
+Continued to work on trivia, wrote shuffle code 
