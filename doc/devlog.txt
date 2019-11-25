@@ -94,3 +94,6 @@ Modified base.html to change alert color based on flashed message category and m
 kimT -- 2019-11-25 5:26
 Finished most of strength.html.
 Added strengthresults.html; still needs some adjustments.
+
+jamalK -- 2019-11-25 12:00
+Linked style.css stylesheet in base.html.
