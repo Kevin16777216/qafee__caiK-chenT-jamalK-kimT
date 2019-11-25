@@ -7,6 +7,8 @@
   <br>
   <h1 class="d-inline bg-danger px-3 rounded">Strength Arena</h1>
   <br>
+  <p class="lead">Beat a random superhero in Rock-Paper-Scissors to win 2 gold and a small boost in strength!</p>
+  <p class="lead">Ties counts as a loss too!</p>
 </div>
 
 <br>
@@ -19,8 +21,13 @@
       <br>
       <h3>{{name}}</h3>
     </div>
+    <div class="col-xs">
+      <h3>Versus</h3>
+    </div>
     <div class="col">
-
+      <img src={{heroImage}} width="200" alt="Picture of {{heroName}}" style="border: 8px outset black">
+      <br>
+      <h3>{{heroName}}</h3>
     </div>
   </div>
 </div>
@@ -30,16 +37,30 @@
 <div id="rock paper scissors" class="container float-center">
   <div class="row">
     <div class="col">
-      <button type="button" name="button">
+    <form action="/strengthresults">
+      <input type="hidden" name="rpc" value="1">
+      <button class="btn btn-danger border-0 rounded-circle" type="submit" name="submit">
         <img src="static/rock.png" width="200" alt="Rock">
       </button>
+    </form>
     </div>
     <div class="col">
-      <img src="static/paper.png" width="200" alt="Paper">
+    <form action="/strengthresults">
+      <input type="hidden" name="rpc" value="2">
+      <button class="btn btn-warning border-0 rounded-circle" type="submit" name="submit">
+        <img src="static/paper.png" width="200" alt="Paper">
+      </button>
+    </form>
     </div>
     <div class="col">
-      <img src="static/scissors.png" width="200" alt="Scissors">
+    <form action="/strengthresults">
+      <input type="hidden" name="rpc" value="3">
+      <button class="btn btn-info border-0 rounded-circle" type="submit" name="submit">
+        <img src="static/scissors.png" width="200" alt="Scissors">
+      </button>
+    </form>
     </div>
   </div>
 </div>
+<br>
 {% endblock %}

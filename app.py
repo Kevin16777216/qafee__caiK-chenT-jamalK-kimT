@@ -123,12 +123,33 @@ def trivia():
     return render_template('trivia.html')
 
 # STRENGTH MINIGAME
-
+randHeroID = 0
 @app.route("/strength")
 @login_required
 def strength():
     user = dbfunctions.getUser(c,str(session['userID']))
-    return render_template('strength.html', image = user[5], name = user[4])
+    global randHeroID
+    randHeroID = random.randint(1, 731)
+    hImage = dbfunctions.getHeroImage(c, randHeroID)
+    hName = dbfunctions.getHeroName(c, randHeroID)
+    return render_template('strength.html', image = user[5], name = user[4], heroImage = hImage, heroName = hName)
+
+@app.route("/strengthresults")
+@login_required
+def strengthresult():
+    userID = session['userID']
+    user = dbfunctions.getUser(c,str(userID))
+    global randHeroID
+    randRPC = random.randint(1, 3)
+    userRPC = int(request.form['rpc'])
+    hImage = dbfunctions.getHeroImage(c, randHeroID)
+    hName = dbfunctions.getHeroName(c, randHeroID)
+    if (userRPC == 1 and randRPC == 3) or (userRPC == 3 and randRPC == 2) or (userRPC == 2 and randRPC == 1):
+        dbfunctions.updateStats(c, userID, strength = 3, xp = 25, gold = 2)
+        return render_template('strengthresults.html', image = user[5], name = user[4], heroImage = hImage, heroName = hName, userResult = userRPC, heroResult = randRPC, isWinner = True)
+    else:
+        dbfunctions.updateStats(c, userID, strength = 1, xp = 10)
+        return render_template('strengthresults.html', image = user[5], name = user[4], heroImage = hImage, heroName = hName, userResult = userRPC, heroResult = randRPC, isWinner = False)
 
 # LOTTO MINIGAME
 

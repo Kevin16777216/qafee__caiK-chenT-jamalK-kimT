@@ -17,7 +17,7 @@ def createUser(c, username, password, charID):
     c.execute('INSERT INTO users VALUES (NULL, ?, ?, ?, ?, ?, 0, 0, 0, 0, 50)', (username, password, int(charID), name, image))
     id = getUserIDByUsername(c,username)
     c.execute('INSERT INTO characters VALUES (?, ?, ?, ?)', (id, int(charID), name,image))
-    
+
 def getUserIDByUsername(c,username):
     return c.execute("SELECT userID FROM users WHERE username = ?", (username, )).fetchone()[0]
 
@@ -62,3 +62,21 @@ def updateStats(c, userID, **stats):
     for key, value in stats.items():
         newValue = currStats[key] + value
         c.execute('UPDATE users SET {} = ? WHERE userID = ?'.format(key), (newValue, userID))
+
+## GET A HERO IMAGE
+def getHeroImage(c, charID):
+    req = request.Request('https://www.superheroapi.com/api.php/2503373653110667/'+str(charID), headers={'User-Agent': 'Mozilla/5.0'})
+    imagejson = request.urlopen(req).read()
+    if json.loads(imagejson)['response'] == 'error':
+        return "";
+    image = json.loads(imagejson)['image']['url']
+    return image
+
+## GET A HERO NAME
+def getHeroName(c, charID):
+    req = request.Request('https://www.superheroapi.com/api.php/2503373653110667/'+str(charID), headers={'User-Agent': 'Mozilla/5.0'})
+    namejson = request.urlopen(req).read()
+    if json.loads(namejson)['response'] == 'error':
+        return "";
+    name = json.loads(namejson)['name']
+    return name
