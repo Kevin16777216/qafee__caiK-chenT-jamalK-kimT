@@ -97,3 +97,7 @@ Added strengthresults.html; still needs some adjustments.
 
 jamalK -- 2019-11-25 12:00
 Linked style.css stylesheet in base.html.
+
+kimT -- 2019-11-25 13:01
+Edited getStats in dbfunctions.
+Fixed strengthresults.html; it is properly functioning as it should.
