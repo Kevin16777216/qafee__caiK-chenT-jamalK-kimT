@@ -116,3 +116,6 @@ Additional features:
 jamalK -- 2019-11-25 23:52
 Added /levelunlock route and page which unlocks a new character if the user levels up and the new level is a multiple of five.
 This currently only functions when the user levels up from the lotto minigame (still needs to be implemented for experience earned through strength and trivia minigames).
+
+jamalK -- 2019-11-26 14:12
+Updated style.css.
