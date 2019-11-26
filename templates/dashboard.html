@@ -5,12 +5,17 @@
   <h1 class="font-weight-bold">Welcome To Your Dashboard</h1>
 </div>
 
-{% if levelUp and (((xp/100 + 1) | int) % 5 == 0) %}
-<div id="levelup" class="my-5 container text-center">
-  <h4>You have unlocked a new character for reaching Level {{ (xp/100 + 1) | int }}!</h4>
-  <form action="/levelunlock" method="POST">
-    <button type="submit" class="btn btn-primary btn-lg">Unlock Character</button>
-  </form>
+{% if levelUp  %}
+<div id="levelup" class="my-3 container text-center">
+  <div class="alert alert-primary" role="alert">
+    <h4>You have leveled up to Level {{ (xp/100 + 1) | int }}</h4>
+    {% if ((xp/100 + 1) | int) % 5 == 0 %}
+    <h4>You have unlocked a new character!</h4>
+    <form action="/levelunlock" method="POST">
+      <button type="submit" class="btn btn-primary btn-lg">Unlock Character</button>
+    </form>
+    {% endif %}
+  </div>
 </div>
 {% endif %}
 
