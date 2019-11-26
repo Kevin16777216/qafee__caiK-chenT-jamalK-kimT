@@ -108,8 +108,7 @@ Our prioritized todo list:
   - Finish the Strength results page: 11/27           <Taejoon Kim>
   - Finish the Intelligence Trivia minigame: 11/27    <Tammy Chen>
   - Finish the Collection Page: 11/28                 <Kevin Cai>
-  - Finish the leveling system: 12/2                  <Kazi Jamal>
+  - Finish the leveling system: 11/28                  <Kazi Jamal>
 Additional features:
   - Add the ability to switch between characters: 12/4                  <Kevin Cai>
-  - Ability to change character after a certain amount of levels: 12/2  <Kazi Jamal>
-  - Organize Bootstrap styling to be consistent between pages: 12/2     <Tammy Chen> 
+  - Modify Bootstrap styling to be consistent between pages: 12/2     <Tammy Chen> 
