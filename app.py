@@ -201,7 +201,7 @@ def strengthresults():
     hImage = dbfunctions.getHeroImage(c, randHeroID)
     hName = dbfunctions.getHeroName(c, randHeroID)
     if (userRPC == 1 and randRPC == 3) or (userRPC == 3 and randRPC == 2) or (userRPC == 2 and randRPC == 1):
-        dbfunctions.updateStats(c, userID, strength = 3, xp = 25, gold = 2)
+        dbfunctions.updateStats(c, userID, strength = 3, xp = 25, gold = 5)
         return render_template('strengthresults.html', image = user[5], name = user[4], heroImage = hImage, heroName = hName, userResult = userRPC, heroResult = randRPC, isWinner = True)
     else:
         dbfunctions.updateStats(c, userID, strength = 1, xp = 10)

@@ -3,16 +3,13 @@
 {% block title %}Strength Arena Results{% endblock %}
 
 {% block body %}
-<div id="title block" class="container text-center">
+<div id="title block" class="container my-5 text-center">
   <br>
   <h1 class="d-inline bg-danger px-3 rounded">Strength Arena</h1>
   <br>
 </div>
 
-<br>
-<br>
-
-<div id="versus" class="container float-center text-center">
+<div id="versus" class="container my-5 text-center">
   <div class="row">
     <div class="col">
       {% if isWinner %}
@@ -40,9 +37,7 @@
   </div>
 </div>
 
-<br>
-
-<div id="rock paper scissors" class="container float-center">
+<div id="rock paper scissors" class="container my-5 text-center">
   <div class="row">
     <div class="col">
       {% if userResult == 1 %}
