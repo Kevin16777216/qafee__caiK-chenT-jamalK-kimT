@@ -112,3 +112,7 @@ Our prioritized todo list:
 Additional features:
   - Add the ability to switch between characters: 12/4                  <Kevin Cai>
   - Modify Bootstrap styling to be consistent between pages: 12/2     <Tammy Chen> 
+
+jamalK -- 2019-11-25 23:52
+Added /levelunlock route and page which unlocks a new character if the user levels up and the new level is a multiple of five.
+This currently only functions when the user levels up from the lotto minigame (still needs to be implemented for experience earned through strength and trivia minigames).

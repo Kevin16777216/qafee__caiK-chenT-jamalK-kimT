@@ -8,15 +8,20 @@
 </div>
 
 <div id="lotto" class="my-5 container text-center">
-  <div class="alert alert-danger" role="alert">
+  {% if isWinner %}
+  <div class="alert alert-success" role="alert">
     <h1 class="font-weight-bold">
-      {% if isWinner %}
       🎰 🎰 🎰 YOU WON! 🎰 🎰 🎰
-      {% else %}
-      🎰 🎰 🎰 YOU LOST! 🎰 🎰 🎰
-      {% endif %}
     </h1>
   </div>
+  {% else %}
+  <div class="alert alert-danger" role="alert">
+    <h1 class="font-weight-bold">
+      🎰 🎰 🎰 YOU LOST! 🎰 🎰 🎰
+    </h1>
+  </div>
+  {% endif %}
+      
   <div class="row">
     <div class="col-sm">
 	<img class="card-img-top" style="border: black solid 10px; border-radius: 10px;" src="{{ img1 }}" alt="slot">

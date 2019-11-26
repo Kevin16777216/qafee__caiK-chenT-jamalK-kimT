@@ -112,10 +112,32 @@ def logout():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    user = dbfunctions.getUser(c,str(session['userID']))
-    return render_template('dashboard.html', name = user[4], image = user[5], xp = user[6], strength = user[7], intelligence = user[8], luck = user[9], gold = user[10])
+    user = dbfunctions.getUser(c, str(session['userID']))
+    return render_template('dashboard.html', name = user[4], image = user[5], xp = user[6], strength = user[7], intelligence = user[8], luck = user[9], gold = user[10], levelUp = False)
+
+@app.route("/dashboard/levelup")
+@login_required
+def dashboardLevelUp():
+    user = dbfunctions.getUser(c, str(session['userID']))
+    return render_template('dashboard.html', name = user[4], image = user[5], xp = user[6], strength = user[7], intelligence = user[8], luck = user[9], gold = user[10], levelUp = True)
+
+# UNLOCK NEW CHARACTER IF LEVELED UP AND NEW LEVEL IS MULTIPLE OF FIVE
+
+@app.route("/levelunlock", methods=["POST"])
+@login_required
+def levelUnlock():
+    userID = session['userID']
+    charCount = dbfunctions.getCharCount(c)
+    charID = random.randint(1, charCount)
+    charName = dbfunctions.getName(c, charID)
+    charImg = dbfunctions.getImage(c, charID)
+    dbfunctions.addChar(c, userID, charID, charName, charImg)
+    dbfunctions.switchChar(c, userID, charID, charName, charImg)
+    db.commit()
+    return render_template("levelunlock.html", charName = charName, charImg = charImg)
 
 # TRIVIA MINIGAME
+
 original_questions = {
  #Format is 'question':[options]
  'The programming language Swift was created to replace what other programming language?':['Objective-C','Ruby','Java','C++'],
@@ -223,19 +245,23 @@ def lottoSwitch():
     charImg = request.form['charImg']
     dbfunctions.addChar(c, userID, charID, charName, charImg)
     dbfunctions.switchChar(c, userID, charID, charName, charImg)
-    dbfunctions.updateStats(c, userID, luck = 5, xp = 25)
+    dbfunctions.updateStats(c, userID, luck = 5, xp = 50)
     db.commit()
     stats = dbfunctions.getStats(c, userID)
-    return render_template("lottoswitch.html", charName = charName, charImg = charImg, luck = stats['luck'], xp = stats['xp'])
+    currXP = stats['xp']
+    leveledUp = dbfunctions.levelUp(currXP-50, currXP)
+    return render_template("lottoswitch.html", charName = charName, charImg = charImg, luck = stats['luck'], xp = currXP, leveledUp = leveledUp)
 
 @app.route("/lottogold", methods=["POST"])
 @login_required
 def lottoGold():
     userID = session['userID']
-    dbfunctions.updateStats(c, userID, gold = 50, luck = 5, xp = 25)
+    dbfunctions.updateStats(c, userID, gold = 50, luck = 5, xp = 50)
     db.commit()
     stats = dbfunctions.getStats(c, userID)
-    return render_template("lottogold.html", gold = stats['gold'], luck = stats['luck'], xp = stats['xp'])
+    currXP = stats['xp']
+    leveledUp = dbfunctions.levelUp(currXP-50, currXP)
+    return render_template("lottogold.html", gold = stats['gold'], luck = stats['luck'], xp = currXP, leveledUp = leveledUp)
 
 # COLLECTION
 @app.route("/collection")

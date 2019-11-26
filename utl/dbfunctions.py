@@ -24,6 +24,13 @@ def getUserIDByUsername(c,username):
 def getUser(c,userID):
     return c.execute("SELECT * FROM users WHERE userID = " + userID).fetchone()
 
+## GET USER XP
+def getXP(c, userID):
+    return c.execute("SELECT xp FROM users WHERE userID = ?", (userID, ))
+
+def levelUp(xp1, xp2):
+    return (int(xp1/100) + 1) != (int(xp2/100) + 1)
+
 ## GET A CHARACTER IMAGE
 def getImage(c, charID):
     image = "https://rickandmortyapi.com/api/character/avatar/"+str(charID)+".jpeg"
