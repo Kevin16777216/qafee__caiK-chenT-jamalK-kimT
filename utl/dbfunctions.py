@@ -72,9 +72,11 @@ def updateStats(c, userID, **stats):
 
 ## RETURN ALL CHARACTERS - return dictionary of images
 def getCharacters(c, userID):
-    c.execute('SELECT charImg FROM users WHERE userID = ?', (userID,))
+    c.execute('SELECT charImg FROM characters WHERE userID = ?', (userID,))
     stats = c.fetchall()
-    out = stats
+    out = []
+    for i in stats:
+        out.append(i[0])
     return out
 
 ## GET A HERO IMAGE
