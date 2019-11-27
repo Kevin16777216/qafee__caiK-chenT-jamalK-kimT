@@ -119,3 +119,6 @@ This currently only functions when the user levels up from the lotto minigame (s
 
 jamalK -- 2019-11-26 14:12
 Updated style.css.
+
+jamalK -- 2019-11-25 22:11
+Added names as figure captions to character collection page.
