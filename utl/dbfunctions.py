@@ -98,8 +98,8 @@ def getHeroName(c, charID):
     return name
 
 def quest(bank):
-    q = request.urlopen("https://opentdb.com/api.php?amount=10&category=18").read()
-    for i in range(9):
+    q = request.urlopen("https://opentdb.com/api.php?amount=10&category=18&type=multiple").read()
+    for i in range(10):
         count = json.loads(q)['results'][i]
         print(count)
         print(count['correct_answer'])

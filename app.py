@@ -141,9 +141,6 @@ def levelUnlock():
 #                  TRIVIA MINIGAME                      #
 #########################################################
 
-original_questions = {}
-
-
 def shuffle(q):
     """
     This function is for shuffling
@@ -161,6 +158,7 @@ def shuffle(q):
 
 @app.route("/trivia")
 def trivia():
+    original_questions = {}
     dbfunctions.quest(original_questions)
     print("hi")
     questions = copy.deepcopy(original_questions)
