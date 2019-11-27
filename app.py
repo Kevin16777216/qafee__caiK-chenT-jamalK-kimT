@@ -140,6 +140,8 @@ def levelUnlock():
 #########################################################
 #                  TRIVIA MINIGAME                      #
 #########################################################
+cop = {}
+que = {}
 
 def shuffle(q):
     """
@@ -153,31 +155,36 @@ def shuffle(q):
         if current_selection not in selected_keys:
             selected_keys.append(current_selection)
             i += 1
-    print("done")
+    #print("done")
     return selected_keys
 
 @app.route("/trivia")
 def trivia():
     original_questions = {}
     dbfunctions.quest(original_questions)
-    print("hi")
+    #print("hi")
     questions = copy.deepcopy(original_questions)
+    cop = original_questions
+    que = questions
     questions_shuffled = shuffle(questions)
-    print("here")
-    print(questions)
+    #print("here")
+    #print(questions)
     for i in questions.keys():
         #print("hello")
         random.shuffle(questions[i])
-    print("out")
+    #print("out")
     return render_template('trivia.html', q = questions_shuffled, o = questions)
 
 @app.route('/quiz', methods=['POST'])
 def quiz_answers():
     correct = 0
-    for i in questions.keys():
+    print("here")
+    for i in que.keys():
         answered = request.form[i]
-        if original_questions[i][0] == answered:
+        print("here")
+        if cop[i][0] == answered:
             correct += 1
+    cop = {}
     return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
 
 #########################################################
