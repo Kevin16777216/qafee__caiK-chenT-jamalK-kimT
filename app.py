@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from functools import wraps
 import urllib.request as urlrequest
+#import urllib.request as request
 import json
 import sqlite3, os, random, copy
 import utl.dbfunctions as dbfunctions
@@ -136,49 +137,60 @@ def levelUnlock():
     db.commit()
     return render_template("levelunlock.html", charName = charName, charImg = charImg)
 
-# TRIVIA MINIGAME
-
-original_questions = {
- #Format is 'question':[options]
- 'The programming language Swift was created to replace what other programming language?':['Objective-C','Ruby','Java','C++'],
- 'On which computer hardware device is the BIOS chip located?':['Motherboard','Hard Disk Drive','Central Processing Unit','Graphics Processing Unit'],
- 'In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?':['Final','Static','Private','Public'],
-
-}
-
-questions = copy.deepcopy(original_questions)
+#########################################################
+#                  TRIVIA MINIGAME                      #
+#########################################################
+cop = {}
+que = {}
 
 def shuffle(q):
- """
- This function is for shuffling
- the dictionary elements.
- """
- selected_keys = []
- i = 0
- while i < len(q):
-  current_selection = random.choice(list(q.keys()))
-  if current_selection not in selected_keys:
-   selected_keys.append(current_selection)
-   i += 1
- return selected_keys
+    """
+    This function is for shuffling
+    the dictionary elements.
+    """
+    selected_keys = []
+    i = 0
+    while i < len(q):
+        current_selection = random.choice(list(q.keys()))
+        if current_selection not in selected_keys:
+            selected_keys.append(current_selection)
+            i += 1
+    #print("done")
+    return selected_keys
 
 @app.route("/trivia")
 def trivia():
- questions_shuffled = shuffle(questions)
- for i in questions.keys():
-  random.shuffle(questions[i])
- return render_template('trivia.html', q = questions_shuffled, o = questions)
+    original_questions = {}
+    dbfunctions.quest(original_questions)
+    #print("hi")
+    questions = copy.deepcopy(original_questions)
+    cop = original_questions
+    que = questions
+    questions_shuffled = shuffle(questions)
+    #print("here")
+    #print(questions)
+    for i in questions.keys():
+        #print("hello")
+        random.shuffle(questions[i])
+    #print("out")
+    return render_template('trivia.html', q = questions_shuffled, o = questions)
 
 @app.route('/quiz', methods=['POST'])
 def quiz_answers():
- correct = 0
- for i in questions.keys():
-  answered = request.form[i]
-  if original_questions[i][0] == answered:
-   correct += 1
- return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
+    correct = 0
+    print("here")
+    for i in que.keys():
+        answered = request.form[i]
+        print("here")
+        if cop[i][0] == answered:
+            correct += 1
+    cop = {}
+    return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
 
-# STRENGTH MINIGAME
+#########################################################
+#                  STRENGTH MINIGAME                    #
+#########################################################
+
 randHeroID = 0
 @app.route("/strength")
 @login_required
@@ -201,13 +213,15 @@ def strengthresults():
     hImage = dbfunctions.getHeroImage(c, randHeroID)
     hName = dbfunctions.getHeroName(c, randHeroID)
     if (userRPC == 1 and randRPC == 3) or (userRPC == 3 and randRPC == 2) or (userRPC == 2 and randRPC == 1):
-        dbfunctions.updateStats(c, userID, strength = 3, xp = 25, gold = 2)
+        dbfunctions.updateStats(c, userID, strength = 3, xp = 25, gold = 5)
         return render_template('strengthresults.html', image = user[5], name = user[4], heroImage = hImage, heroName = hName, userResult = userRPC, heroResult = randRPC, isWinner = True)
     else:
         dbfunctions.updateStats(c, userID, strength = 1, xp = 10)
         return render_template('strengthresults.html', image = user[5], name = user[4], heroImage = hImage, heroName = hName, userResult = userRPC, heroResult = randRPC, isWinner = False)
 
-# LOTTO MINIGAME
+#########################################################
+#                  LOTTO MINIGAME                       #
+#########################################################
 
 @app.route("/lotto")
 @login_required
@@ -263,7 +277,9 @@ def lottoGold():
     leveledUp = dbfunctions.levelUp(currXP-50, currXP)
     return render_template("lottogold.html", gold = stats['gold'], luck = stats['luck'], xp = currXP, leveledUp = leveledUp)
 
-# COLLECTION
+#########################################################
+#                      COLLECTION                       #
+#########################################################
 @app.route("/collection")
 @login_required
 def collection():

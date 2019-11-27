@@ -3,18 +3,16 @@
 {% block title %}Strength Arena{% endblock %}
 
 {% block body %}
-<div id="title block" class="container text-center">
-  <br>
+<div id="title block" class="container my-5 text-center">
   <h1 class="d-inline bg-danger px-3 rounded">Strength Arena</h1>
-  <br>
+</div>
+
+<div id="description" class="container my-5 text-center">
   <p class="lead">Beat a random superhero in Rock-Paper-Scissors to win 2 gold and a small boost in strength!</p>
   <p class="lead">Ties counts as a loss too!</p>
 </div>
 
-<br>
-<br>
-
-<div id="versus" class="container float-center text-center">
+<div id="versus" class="container my-5 text-center">
   <div class="row">
     <div class="col">
       <img src={{image}} width="200" alt="Picture of {{name}}" style="border: 8px outset black">
@@ -32,9 +30,7 @@
   </div>
 </div>
 
-<br>
-
-<div id="rock paper scissors" class="container float-center">
+<div id="rock paper scissors" class="container my-5 text-center">
   <div class="row">
     <div class="col">
     <form action="/strengthresults" method="POST">

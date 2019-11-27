@@ -96,3 +96,13 @@ def getHeroName(c, charID):
         return "";
     name = json.loads(namejson)['name']
     return name
+
+def quest(bank):
+    q = request.urlopen("https://opentdb.com/api.php?amount=10&category=18&type=multiple").read()
+    for i in range(10):
+        count = json.loads(q)['results'][i]
+        print(count)
+        print(count['correct_answer'])
+        ans = [count['correct_answer']]
+        bank[count['question']] = [*ans,*count['incorrect_answers']]
+    print(bank)
