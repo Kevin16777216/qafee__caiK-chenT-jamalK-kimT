@@ -8,9 +8,9 @@
   <p class="lead">Here lies all the characters you have collected</p>
 </div>
 
-<div id="collection" class="my-5 container text-center">
+<div id="collection" class="container-fluid text-center">
   {% for character in characters %}
-  <img class="d-inline" src = {{character}} width="200" alt="character image" style="border: 8px outset black" />
+  <img class="m-3 d-inline" src = {{ character[1] }} width="200" alt="character image" style="border: 8px outset black" />
   {% endfor %}
 </div>
 {% endblock %}

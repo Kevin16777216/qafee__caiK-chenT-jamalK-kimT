@@ -70,13 +70,13 @@ def updateStats(c, userID, **stats):
         newValue = currStats[key] + value
         c.execute('UPDATE users SET {} = ? WHERE userID = ?'.format(key), (newValue, userID))
 
-## RETURN ALL CHARACTERS - return dictionary of images
+## RETURN ALL CHARACTERS - return list of character names and images
 def getCharacters(c, userID):
-    c.execute('SELECT charImg FROM characters WHERE userID = ?', (userID,))
+    c.execute('SELECT charName, charImg FROM characters WHERE userID = ?', (userID,))
     stats = c.fetchall()
     out = []
     for i in stats:
-        out.append(i[0])
+        out.append((i[0], i[1]))
     return out
 
 ## GET A HERO IMAGE
