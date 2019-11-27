@@ -130,6 +130,9 @@ Design document changes:
 -Added extra routes for accepting(switch character) and rejecting(recieve gold) lotto results
 -Added extra route to change character from collection.
 
-jamalK -- 2019-11-26 11:00
+jamalK -- 2019-11-27 11:00
 Updated login page styling.
 Updated sign up page styling.
+
+jamalK -- 2019-11-27 14:43
+Added cap of 100 to stats.
