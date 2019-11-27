@@ -132,3 +132,4 @@ Design document changes:
 
 jamalK -- 2019-11-26 11:00
 Updated login page styling.
+Updated sign up page styling.
