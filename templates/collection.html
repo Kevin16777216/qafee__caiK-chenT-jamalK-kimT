@@ -11,8 +11,8 @@
 <div id="collection" class="container-fluid text-center">
   <div class="row">
     {% for character in characters %}
-    <div class="col-sm">
-      <img class="m-2 d-inline" src = {{ character[1] }} width="200" alt="{{ character[0] }} image" style="border: 8px outset black">
+    <div class="col m-3">
+      <img class="d-inline" src = {{ character[1] }} width="200" alt="{{ character[0] }} image" style="border: 8px outset black">
       <figcaption>{{ character[0] }}</figcaption>
     </div>
     {% endfor %}
