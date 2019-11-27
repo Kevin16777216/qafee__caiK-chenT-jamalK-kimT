@@ -123,8 +123,12 @@ Updated style.css.
 jamalK -- 2019-11-25 22:11
 Added names as figure captions to character collection page.
 
-caiK -- 2019-11-26 6:52
+caiK -- 2019-11-26 06:52
+Design document changes:
 -Removed authnetication routes from minigames as they were unecessary
 -Removed extra character selection page as it is part of the register page
 -Added extra routes for accepting(switch character) and rejecting(recieve gold) lotto results
 -Added extra route to change character from collection.
+
+jamalK -- 2019-11-26 11:00
+Updated login page styling.
