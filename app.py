@@ -140,14 +140,7 @@ def levelUnlock():
 #########################################################
 #                  TRIVIA MINIGAME                      #
 #########################################################
-cop = {}
-que = {}
-
 def shuffle(q):
-    """
-    This function is for shuffling
-    the dictionary elements.
-    """
     selected_keys = []
     i = 0
     while i < len(q):
@@ -155,36 +148,26 @@ def shuffle(q):
         if current_selection not in selected_keys:
             selected_keys.append(current_selection)
             i += 1
-    #print("done")
     return selected_keys
 
 @app.route("/trivia")
 def trivia():
     original_questions = {}
     dbfunctions.quest(original_questions)
-    #print("hi")
     questions = copy.deepcopy(original_questions)
-    cop = original_questions
-    que = questions
     questions_shuffled = shuffle(questions)
-    #print("here")
-    #print(questions)
     for i in questions.keys():
-        #print("hello")
         random.shuffle(questions[i])
-    #print("out")
     return render_template('trivia.html', q = questions_shuffled, o = questions)
 
-@app.route('/quiz', methods=['POST'])
-def quiz_answers():
+@app.route('/triviaresults', methods=['POST'])
+def triviaresults(original_questions):
     correct = 0
-    print("here")
-    for i in que.keys():
+    for i in original_questions.keys():
         answered = request.form[i]
-        print("here")
-        if cop[i][0] == answered:
+        if original_questions[i][0] == answered:
             correct += 1
-    cop = {}
+    original_questions = {}
     return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
 
 #########################################################
@@ -214,8 +197,13 @@ def strengthresults():
     hName = dbfunctions.getHeroName(c, randHeroID)
     winner = False
     if (userRPC == 1 and randRPC == 3) or (userRPC == 3 and randRPC == 2) or (userRPC == 2 and randRPC == 1):
+<<<<<<< HEAD
         dbfunctions.updateStats(c, userID, strength = 3, xp = 25, gold = 5)
         winner = True
+=======
+        dbfunctions.updateStats(c, userID, strength = 3, xp = 25, gold = 2)
+        return render_template('strengthresults.html', image = user[5], name = user[4], heroImage = hImage, heroName = hName, userResult = userRPC, heroResult = randRPC, isWinner = True)
+>>>>>>> 8a3e20b5029997f62991083e50f30855442b7eac
     else:
         dbfunctions.updateStats(c, userID, strength = 1, xp = 10)
     stats = dbfunctions.getStats(c, str(userID))
