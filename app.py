@@ -150,24 +150,29 @@ def shuffle(q):
             i += 1
     return selected_keys
 
+global original_questions
+original_questions = {}
+
 @app.route("/trivia")
 def trivia():
-    original_questions = {}
+    dbfunctions.addQuestions(c)
     dbfunctions.quest(original_questions)
     questions = copy.deepcopy(original_questions)
     questions_shuffled = shuffle(questions)
     for i in questions.keys():
         random.shuffle(questions[i])
-    return render_template('trivia.html', q = questions_shuffled, o = questions)
+    return render_template('trivia.html', q = questions_shuffled, o = questions, og = original_questions)
 
 @app.route('/triviaresults', methods=['POST'])
-def triviaresults(original_questions):
+def triviaresults():
     correct = 0
-    for i in original_questions.keys():
+    original_question = original_questions
+    print(original_question)
+    for i in original_question.keys():
         answered = request.form[i]
-        if original_questions[i][0] == answered:
+        if original_question[i][0] == answered:
             correct += 1
-    original_questions = {}
+    original_question = {}
     return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
 
 #########################################################

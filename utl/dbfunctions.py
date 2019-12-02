@@ -6,9 +6,9 @@ import json
 def createTables(c):
     c.execute('CREATE TABLE IF NOT EXISTS users (userID INTEGER PRIMARY KEY, username TEXT, password TEXT, charID INTEGER, charName TEXT, charImg TEXT, xp INTEGER, strength INTEGER, intelligence INTEGER, luck INTEGER, gold INTEGER)')
     c.execute('CREATE TABLE IF NOT EXISTS characters (userID, charID INTEGER, charName INTEGER, charImg TEXT)')
+    c.execute('CREATE TABLE IF NOT EXISTS trivia (questions TEXT, one TEXT, two TEXT, three TEXT, four TEXT)')
 
 ## CREATE Account
-
 # function that takes the given parameters to create a story & add it to the database
 def createUser(c, username, password, charID):
     image = "https://rickandmortyapi.com/api/character/avatar/"+ charID +".jpeg"
@@ -109,9 +109,19 @@ def quest(bank):
     q = request.urlopen("https://opentdb.com/api.php?amount=10&category=18&type=multiple").read()
     for i in range(5):
         count = json.loads(q)['results'][i]
-        print(count)
-        print(count['correct_answer'])
+        #print(count)
+        #print(count['correct_answer'])
         ans = [count['correct_answer']]
         bank[count['question']] = [*ans,*count['incorrect_answers']]
     print(bank)
     return bank
+
+def addQuestions(c):
+    og = {}
+    og = quest(og)
+    for i in range(5):
+        ques = list(og)[i]
+        c.execute('INSERT INTO trivia VALUES (?, ?, ?, ?, ?)', (ques, og[ques][0], og[ques][1], og[ques][2], og[ques][3]))
+
+def getQuestion(i):
+    return 0
