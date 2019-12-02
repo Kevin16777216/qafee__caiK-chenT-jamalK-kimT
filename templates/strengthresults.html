@@ -110,6 +110,12 @@
 </div>
 
 <div class="my-5 container text-center">
-  <a href="/dashboard" class="btn btn-danger btn-lg">Return to Dashboard</a>
+  <a href="
+    {% if leveledUp %}
+    /dashboard/levelup
+    {% else %}
+    /dashboard
+    {% endif %}
+  " class="btn btn-danger btn-lg">Return to Dashboard</a>
 </div>
 {% endblock %}
