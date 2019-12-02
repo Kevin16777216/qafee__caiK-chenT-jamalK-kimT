@@ -150,34 +150,31 @@ def shuffle(q):
             i += 1
     return selected_keys
 
-global original_questions
-original_questions = {}
-
 @app.route("/trivia")
 def trivia():
     dbfunctions.addQuestions(c)
-    dbfunctions.quest(original_questions)
+    original_questions = dbfunctions.questBank(c)
+    print(original_questions)
+    #dbfunctions.quest(original_questions)
     questions = copy.deepcopy(original_questions)
     questions_shuffled = shuffle(questions)
-    print("----------------------------")
-    for i in range(5):
-        print(dbfunctions.getQuestion(c, i))
-    print("----------------------------")
     for i in questions.keys():
         random.shuffle(questions[i])
     return render_template('trivia.html', q = questions_shuffled, o = questions, og = original_questions)
 
 @app.route('/triviaresults', methods=['POST'])
 def triviaresults():
-    correct = 0
-    original_question = original_questions
+    correct = 0;
+    original_question = dbfunctions.questBank(c)
     print(original_question)
-    for i in original_question.keys():
-        answered = request.form[i]
-        if original_question[i][0] == answered:
-            correct += 1
-    original_question = {}
-    return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
+    if request.method == 'POST':
+        for i in original_question.keys():
+            answered = request.form[i]
+            if original_question[i][0] == answered:
+                correct += 1
+        original_question = {}
+    else:
+        return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
 
 #########################################################
 #                  STRENGTH MINIGAME                    #

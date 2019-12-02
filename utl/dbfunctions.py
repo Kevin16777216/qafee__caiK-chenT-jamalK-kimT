@@ -108,13 +108,13 @@ def getHeroName(c, charID):
 # makes dictionary from API
 def quest(bank):
     q = request.urlopen("https://opentdb.com/api.php?amount=10&category=18&type=multiple").read()
-    for i in range(5):
+    for i in range(1):
         count = json.loads(q)['results'][i]
         #print(count)
         #print(count['correct_answer'])
         ans = [count['correct_answer']]
         bank[count['question']] = [*ans,*count['incorrect_answers']]
-    print(bank)
+    #print(bank)
     return bank
 
 def addQuestions(c):
@@ -126,3 +126,13 @@ def addQuestions(c):
 
 def getQuestion(c, i):
     return c.execute("SELECT questions, one, two, three, four FROM trivia WHERE number = ?", (i, )).fetchone()
+
+# returns the dictionary from the stored information
+def questBank(c):
+    bank = []
+    for i in range(5):
+        bank.append(getQuestion(c, i))
+    bankDic = {}
+    for i in range(5):
+        bankDic[bank[i][0]] = [bank[i][1], bank[i][2], bank[i][3], bank[i][4]]
+    return bankDic

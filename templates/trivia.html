@@ -5,13 +5,16 @@
   <div class="instruction">
     <p class="text-center"> Get 1 gold for every question answered correctly, and increase your intelligence stat </p>
     <div class = "form-group">
-      <form action = "{{url_for('triviaresults')}}" method='POST'>
+      <form action = "/triviaresults" method='POST'>
         <ol>
           {% for i in q %}
               <li>{{i}}</li>
+              <div class="form-check">
               {% for j in o[i] %}
-                  <br><input type='radio' value='{{j}}' name= {{i}}' />{{j}}
+                  <br><input class ="form-check-input" type='radio' value='{{j}}' name= {{i}}' />
+                    <label class="form-check-label"> {{j}} </label>
               {% endfor %}
+              </div>
           {% endfor %}
           <br>
         </ol>
