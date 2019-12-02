@@ -141,10 +141,6 @@ def levelUnlock():
 #                  TRIVIA MINIGAME                      #
 #########################################################
 def shuffle(q):
-    """
-    This function is for shuffling
-    the dictionary elements.
-    """
     selected_keys = []
     i = 0
     while i < len(q):
@@ -158,25 +154,15 @@ def shuffle(q):
 def trivia():
     original_questions = {}
     dbfunctions.quest(original_questions)
-    global save
-    save = original_questions
     questions = copy.deepcopy(original_questions)
     questions_shuffled = shuffle(questions)
-    print("--------------------")
-    print(save)
-    print("--------------------")
     for i in questions.keys():
         random.shuffle(questions[i])
     return render_template('trivia.html', q = questions_shuffled, o = questions)
 
 @app.route('/triviaresults', methods=['POST'])
-def quiz_answers():
+def triviaresults(original_questions):
     correct = 0
-    global save
-    print("--------------------")
-    print(save)
-    print("--------------------")
-    #print("here")
     for i in original_questions.keys():
         answered = request.form[i]
         if original_questions[i][0] == answered:
