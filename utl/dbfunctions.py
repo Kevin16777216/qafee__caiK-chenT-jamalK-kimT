@@ -6,7 +6,8 @@ import json
 def createTables(c):
     c.execute('CREATE TABLE IF NOT EXISTS users (userID INTEGER PRIMARY KEY, username TEXT, password TEXT, charID INTEGER, charName TEXT, charImg TEXT, xp INTEGER, strength INTEGER, intelligence INTEGER, luck INTEGER, gold INTEGER)')
     c.execute('CREATE TABLE IF NOT EXISTS characters (userID, charID INTEGER, charName INTEGER, charImg TEXT)')
-    c.execute('CREATE TABLE IF NOT EXISTS trivia (questions TEXT, one TEXT, two TEXT, three TEXT, four TEXT)')
+    c.execute('DROP TABLE trivia')
+    c.execute('CREATE TABLE IF NOT EXISTS trivia (number INTEGER, questions TEXT, one TEXT, two TEXT, three TEXT, four TEXT)')
 
 ## CREATE Account
 # function that takes the given parameters to create a story & add it to the database
@@ -121,7 +122,7 @@ def addQuestions(c):
     og = quest(og)
     for i in range(5):
         ques = list(og)[i]
-        c.execute('INSERT INTO trivia VALUES (?, ?, ?, ?, ?)', (ques, og[ques][0], og[ques][1], og[ques][2], og[ques][3]))
+        c.execute('INSERT INTO trivia VALUES (?, ?, ?, ?, ?, ?)', (i, ques, og[ques][0], og[ques][1], og[ques][2], og[ques][3]))
 
-def getQuestion(i):
-    return 0
+def getQuestion(c, i):
+    return c.execute("SELECT questions, one, two, three, four FROM trivia WHERE number = ?", (i, )).fetchone()

@@ -159,6 +159,10 @@ def trivia():
     dbfunctions.quest(original_questions)
     questions = copy.deepcopy(original_questions)
     questions_shuffled = shuffle(questions)
+    print("----------------------------")
+    for i in range(5):
+        print(dbfunctions.getQuestion(c, i))
+    print("----------------------------")
     for i in questions.keys():
         random.shuffle(questions[i])
     return render_template('trivia.html', q = questions_shuffled, o = questions, og = original_questions)
