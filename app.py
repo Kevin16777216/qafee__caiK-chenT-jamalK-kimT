@@ -15,7 +15,6 @@ DB_FILE = "rammm.db"
 db = sqlite3.connect(DB_FILE, check_same_thread=False) #open if file exists, otherwise create
 c = db.cursor() #facilitate db operations
 dbfunctions.createTables(c)
-
 #decorator that redirects user to login page if not logged in
 def login_required(f):
     @wraps(f)
@@ -144,37 +143,45 @@ def shuffle(q):
     selected_keys = []
     i = 0
     while i < len(q):
-        current_selection = random.choice(list(q.keys()))
-        if current_selection not in selected_keys:
-            selected_keys.append(current_selection)
+        #current_selection = random.choice(list(q.keys()))
+        if list(q.keys())[i] not in selected_keys:
+            selected_keys.append(list(q.keys())[i])
             i += 1
     return selected_keys
 
+#dbfunctions.addQuestions(c)
+
 @app.route("/trivia")
 def trivia():
+    dbfunctions.createTables(c)
     dbfunctions.addQuestions(c)
     original_questions = dbfunctions.questBank(c)
-    print(original_questions)
+    #print(original_questions)
     #dbfunctions.quest(original_questions)
-    questions = copy.deepcopy(original_questions)
-    questions_shuffled = shuffle(questions)
-    for i in questions.keys():
-        random.shuffle(questions[i])
-    return render_template('trivia.html', q = questions_shuffled, o = questions, og = original_questions)
+    #questions = copy.deepcopy(original_questions)
+    questions_shuffled = shuffle(original_questions)
+    for i in original_questions.keys():
+        random.shuffle(original_questions[i])
+    return render_template('trivia.html', q = questions_shuffled, o = original_questions)
 
 @app.route('/triviaresults', methods=['POST'])
 def triviaresults():
+    userID = session['userID']
     correct = 0;
-    original_question = dbfunctions.questBank(c)
-    print(original_question)
+    original_questions = dbfunctions.questBank(c)
+    answers = dbfunctions.answerBank(c)
+    #print(original_question)
     if request.method == 'POST':
-        for i in original_question.keys():
+        for i in original_questions.keys():
             answered = request.form[i]
-            if original_question[i][0] == answered:
+            if original_questions[i][0] == answered:
                 correct += 1
         original_question = {}
     else:
-        return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
+        return render_template('triviaresults.html', correct = correct, answers = answers)
+        #return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
+    dbfunctions.updateStats(c, userID, intelligence = (correct * 3))
+    return render_template('triviaresults.html', correct = correct, answers = answers)
 
 #########################################################
 #                  STRENGTH MINIGAME                    #

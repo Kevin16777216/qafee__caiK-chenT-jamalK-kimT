@@ -1,22 +1,24 @@
 {% extends "basenav.html" %}
 
 {% block body %}
-  <h1 class="bg-info text-center">Intelligence Trivia</h1>
+  <h1 class="bg-info text-center">Intelligence Trivia Results </h1>
   <div class="instruction">
-    <p class="text-center"> Get 1 gold for every question answered correctly, and increase your intelligence stat </p>
+    <p class="text-center"> The following will display the number of questions you answered correct.  </p>
     <div class = "form-group">
       <form action = "url_for('triviaresults', original_questions = o)" method='POST'>
+        <h1 class="text-center"> {{correct}} / 5 </h1>
         <ol>
-          {% for i in q %}
+          {% for i in answers %}
               <li>{{i}}</li>
-              {% for j in o[i] %}
-                  <br><input type='radio' value='{{j}}' name= {{i}}' />{{j}}
-              {% endfor %}
+                {{answers[i][0]}}
           {% endfor %}
           <br>
         </ol>
-        <input type="submit" value="submit" />
+          <br>
       </form>
+      <div class="my-5 container text-center">
+        <a href="/dashboard" class="btn btn-primary btn-lg">Return to Dashboard</a>
+      </div>
     </div>
 
 {% endblock %}
