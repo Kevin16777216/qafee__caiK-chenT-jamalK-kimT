@@ -111,14 +111,11 @@ Our prioritized todo list:
   - Finish the leveling system: 11/28                  <Kazi Jamal>
 Additional features:
   - Add the ability to switch between characters: 12/4                  <Kevin Cai>
-  - Modify Bootstrap styling to be consistent between pages: 12/2     <Tammy Chen> 
+  - Modify Bootstrap styling to be consistent between pages: 12/2     <Tammy Chen>
 
 jamalK -- 2019-11-25 23:52
 Added /levelunlock route and page which unlocks a new character if the user levels up and the new level is a multiple of five.
 This currently only functions when the user levels up from the lotto minigame (still needs to be implemented for experience earned through strength and trivia minigames).
-
-jamalK -- 2019-11-26 14:12
-Updated style.css.
 
 jamalK -- 2019-11-25 22:11
 Added names as figure captions to character collection page.
@@ -130,9 +127,27 @@ Design document changes:
 -Added extra routes for accepting(switch character) and rejecting(recieve gold) lotto results
 -Added extra route to change character from collection.
 
+jamalK -- 2019-11-26 14:12
+Updated style.css.
+
+chenT -- 2019-11-26 15:30
+Working on trivia minigame (got the questions to display) + merge edits
+
 jamalK -- 2019-11-27 11:00
 Updated login page styling.
 Updated sign up page styling.
 
 jamalK -- 2019-11-27 14:43
 Added cap of 100 to stats.
+
+chenT -- 2019-11-29 20:03
+Pushed forgotten-to-push trivia code from Wednesday + merge
+
+chenT -- 2019-11-30 23:45
+Could not figure out how to pass dictionary via argument into the next route, will switch tactics & use a trivia database
+
+chenT -- 2019-12-01 24:02
+Created trivia database
+
+chenT -- 2019-12-02 22:48
+Brushed up trivia minigame, implemented the triviaresults.html page, and tidied code up
