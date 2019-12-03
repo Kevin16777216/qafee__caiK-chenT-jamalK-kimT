@@ -60,7 +60,62 @@
   </div>
 </div>
 
+<div id="stats" class="my-5 container text-center">
+  <div class="row">
+    <div class="col-sm-3">
+      <h3>Strength</h3>
+    </div>
+    <div class="col-sm-7 pt-2">
+      <div class="progress">
+        <div
+          class="progress-bar bg-danger"
+          role="progressbar"
+          style="width: {{ strength }}%"
+          aria-valuenow="{{ strength }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <h3>{{ strength }}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <h3>Level {{ (xp/100 + 1) | int }}</h3>
+    </div>
+    <div class="col-sm-7 pt-2">
+      <div class="progress">
+        <div
+          class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
+          role="progressbar"
+          style="width: {{ (xp%100) | int }}%"
+          aria-valuenow="{{ (xp%100) | int}}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <h3>{{ xp%100 }}/100</h3>
+    </div>
+  </div>
+  <div>
+    {% if isWinner %}
+    <img class="d-inline" src="/static/gold.png" width="50" alt="gold" />
+    <h1 class="d-inline">Gold +5</h1>
+    {% endif %}
+  </div>
+</div>
+
 <div class="my-5 container text-center">
-  <a href="/dashboard" class="btn btn-danger btn-lg">Return to Dashboard</a>
+  <a href="
+    {% if leveledUp %}
+    /dashboard/levelup
+    {% else %}
+    /dashboard
+    {% endif %}
+  " class="btn btn-danger btn-lg">Return to Dashboard</a>
 </div>
 {% endblock %}
