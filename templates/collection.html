@@ -12,7 +12,13 @@
   <div class="row">
     {% for character in characters %}
     <div class="col m-3">
-      <img class="d-inline" src = {{ character[1] }} width="200" alt="{{ character[0] }} image" style="border: 8px outset black">
+      <form action="/switchcharacter" method="POST">
+        <input type="hidden" id="charID" name="charID" value="{{character[2]}}">
+        <input type="hidden" id="charName" name="charName" value="{{ character[0] }}">
+        <input type="hidden" id="charImg" name="charImg" value="{{character[1]}}">
+        <input type="image" class="d-inline" src = {{character[1]}} width="200" alt="{{ character[0] }} image" style="border: 8px outset black">
+        <!-- <--! <img   style="border: 8px outset black"> -->
+      </form>
       <figcaption>{{ character[0] }}</figcaption>
     </div>
     {% endfor %}

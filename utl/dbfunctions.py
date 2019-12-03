@@ -5,7 +5,7 @@ def createTables(c):
     """Creates required tables for users, characters, and trivia in the database."""
     c.execute('CREATE TABLE IF NOT EXISTS users (userID INTEGER PRIMARY KEY, username TEXT, password TEXT, charID INTEGER, charName TEXT, charImg TEXT, xp INTEGER, strength INTEGER, intelligence INTEGER, luck INTEGER, gold INTEGER)')
     c.execute('CREATE TABLE IF NOT EXISTS characters (userID, charID INTEGER, charName INTEGER, charImg TEXT)')
-    c.execute('DROP TABLE trivia')
+    c.execute('DROP TABLE IF EXISTS trivia')
     c.execute('CREATE TABLE IF NOT EXISTS trivia (number INTEGER, questions TEXT, one TEXT, two TEXT, three TEXT, four TEXT)')
 
 def createUser(c, username, password, charID):
@@ -22,7 +22,7 @@ def getUserIDByUsername(c,username):
     return c.execute("SELECT userID FROM users WHERE username = ?", (username, )).fetchone()[0]
 
 def getUser(c,userID):
-    """Returns the record in the users table for the provided userID.""" 
+    """Returns the record in the users table for the provided userID."""
     return c.execute("SELECT * FROM users WHERE userID = " + userID).fetchone()
 
 def getXP(c, userID):
@@ -65,6 +65,9 @@ def getStats(c, userID):
     statDict = {'xp': stats[0], 'strength': stats[1], 'intelligence': stats[2], 'luck': stats[3], 'gold': stats[4]}
     return statDict
 
+def resetStats(c, userID):
+    c.execute('UPDATE users SET luck = 0, intelligence = 0, strength = 0 WHERE userID = ?', (userID, ))
+
 def updateStats(c, userID, **stats):
     """Updates the stats of a user with the provided userID.
     If intelligence, strength, or luck exceed 100, they are capped at 100.
@@ -86,11 +89,11 @@ def updateStats(c, userID, **stats):
 
 def getCharacters(c, userID):
     """Returns a list of tuples of all of a user's characters' images and names provided their userID."""
-    c.execute('SELECT charName, charImg FROM characters WHERE userID = ?', (userID,))
+    c.execute('SELECT charName, charImg, charID FROM characters WHERE userID = ?', (userID,))
     stats = c.fetchall()
     out = []
     for i in stats:
-        out.append((i[0], i[1]))
+        out.append((i[0], i[1],i[2]))
     return out
 
 def getHeroImage(c, charID):
