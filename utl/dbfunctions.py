@@ -1,17 +1,15 @@
 import urllib.request as request
 import json
-## GENERAL SETUP
 
-## CREATE Database
 def createTables(c):
+    """Creates required tables for users, characters, and trivia in the database."""
     c.execute('CREATE TABLE IF NOT EXISTS users (userID INTEGER PRIMARY KEY, username TEXT, password TEXT, charID INTEGER, charName TEXT, charImg TEXT, xp INTEGER, strength INTEGER, intelligence INTEGER, luck INTEGER, gold INTEGER)')
     c.execute('CREATE TABLE IF NOT EXISTS characters (userID, charID INTEGER, charName INTEGER, charImg TEXT)')
     c.execute('DROP TABLE trivia')
     c.execute('CREATE TABLE IF NOT EXISTS trivia (number INTEGER, questions TEXT, one TEXT, two TEXT, three TEXT, four TEXT)')
 
-## CREATE Account
-# function that takes the given parameters to create a story & add it to the database
 def createUser(c, username, password, charID):
+    """Creates a user and adds their information into the users and characters tables."""
     image = "https://rickandmortyapi.com/api/character/avatar/"+ charID +".jpeg"
     namejson = request.urlopen("https://rickandmortyapi.com/api/character/"+ charID).read()
     name = json.loads(namejson)['name']
@@ -20,52 +18,60 @@ def createUser(c, username, password, charID):
     c.execute('INSERT INTO characters VALUES (?, ?, ?, ?)', (id, int(charID), name,image))
 
 def getUserIDByUsername(c,username):
+    """Returns the record in the users table for the provided username."""
     return c.execute("SELECT userID FROM users WHERE username = ?", (username, )).fetchone()[0]
 
 def getUser(c,userID):
+    """Returns the record in the users table for the provided userID.""" 
     return c.execute("SELECT * FROM users WHERE userID = " + userID).fetchone()
 
-## GET USER XP
 def getXP(c, userID):
+    """Returns the xp of a user with the provided userID."""
     return c.execute("SELECT xp FROM users WHERE userID = ?", (userID, ))
 
 def levelUp(xp1, xp2):
+    """Returns a boolean value of whether the player has leveled up or not given the beginning and ending xp."""
     return (int(xp1/100) + 1) != (int(xp2/100) + 1)
 
-## GET A CHARACTER IMAGE
 def getImage(c, charID):
+    """Returns the url for a characters image provided the character's ID."""
     image = "https://rickandmortyapi.com/api/character/avatar/"+str(charID)+".jpeg"
     return image
 
-## GET A CHARACTER NAME
 def getName(c, charID):
+    """Returns the name of a character provided the character's ID."""
     namejson = request.urlopen("https://rickandmortyapi.com/api/character/"+ str(charID)).read()
     name = json.loads(namejson)['name']
     return name
 
-## GET CHARACTER COUNT
 def getCharCount(c):
+    """Returns the current number of total characters from the Rick and Morty API."""
     countjson = request.urlopen("https://rickandmortyapi.com/api/character/").read()
     count = json.loads(countjson)['info']['count']
     return count
 
-## ADD CHARACTER TO USER
 def addChar(c, userID, charID, charName, charImg):
+    """Adds a new character for the provided userID into the characters table."""
     c.execute('INSERT INTO characters VALUES (?, ?, ?, ?)', (userID, charID, charName, charImg))
 
-## SWITCH USERS CURRENT CHARACTER
 def switchChar(c, userID, charID, charName, charImg):
+    """Switches the current character for the user with the provided userID in the users table."""
     c.execute('UPDATE users SET charID = ?, charName = ?, charImg = ? WHERE userID = ?', (charID, charName, charImg, userID))
 
-## RETURN ALL STATS - return dictionary of stats
 def getStats(c, userID):
+    """Returns a dictionary of all of a users stats provided their userID."""
     c.execute('SELECT xp, strength, intelligence, luck, gold FROM users WHERE userID = ?', (userID,))
     stats = c.fetchone()
     statDict = {'xp': stats[0], 'strength': stats[1], 'intelligence': stats[2], 'luck': stats[3], 'gold': stats[4]}
     return statDict
 
-## UPDATE STATS
 def updateStats(c, userID, **stats):
+    """Updates the stats of a user with the provided userID.
+    If intelligence, strength, or luck exceed 100, they are capped at 100.
+
+    Keyword arguments:
+    intelligence, strength, luck, xp, or gold
+    """
     currStats = getStats(c, userID)
     for key, value in stats.items():
         newValue = currStats[key] + value
@@ -78,8 +84,8 @@ def updateStats(c, userID, **stats):
         if newStats['luck'] > 100:
             c.execute('UPDATE users SET luck = 100 WHERE userID = ?', (userID, ))
 
-## RETURN ALL CHARACTERS - return list of character names and images
 def getCharacters(c, userID):
+    """Returns a list of tuples of all of a user's characters' images and names provided their userID."""
     c.execute('SELECT charName, charImg FROM characters WHERE userID = ?', (userID,))
     stats = c.fetchall()
     out = []
@@ -87,8 +93,8 @@ def getCharacters(c, userID):
         out.append((i[0], i[1]))
     return out
 
-## GET A HERO IMAGE
 def getHeroImage(c, charID):
+    """Returns the image of a superhero from the SuperHero API provided their character ID."""
     req = request.Request('https://www.superheroapi.com/api.php/2503373653110667/'+str(charID), headers={'User-Agent': 'Mozilla/5.0'})
     imagejson = request.urlopen(req).read()
     if json.loads(imagejson)['response'] == 'error':
@@ -96,8 +102,8 @@ def getHeroImage(c, charID):
     image = json.loads(imagejson)['image']['url']
     return image
 
-## GET A HERO NAME
 def getHeroName(c, charID):
+    """Returns the name of a superhero from the SuperHero API provided their character ID."""
     req = request.Request('https://www.superheroapi.com/api.php/2503373653110667/'+str(charID), headers={'User-Agent': 'Mozilla/5.0'})
     namejson = request.urlopen(req).read()
     if json.loads(namejson)['response'] == 'error':
@@ -105,7 +111,7 @@ def getHeroName(c, charID):
     name = json.loads(namejson)['name']
     return name
 
-# makes dictionary from API
+# makes dictionary from Open Trivia API
 def quest(bank):
     q = request.urlopen("https://opentdb.com/api.php?amount=10&category=18&type=multiple").read()
     for i in range(5):

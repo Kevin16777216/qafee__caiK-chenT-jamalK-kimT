@@ -222,20 +222,25 @@ def strengthresults():
 #                  LOTTO MINIGAME                       #
 #########################################################
 
+# page to begin the lotto minigame
 @app.route("/lotto")
 @login_required
 def lotto():
     return render_template('lotto.html')
 
+# generates the results of the lotto then displays them on a page
 @app.route("/lottoresults")
 @login_required
 def lottoResults():
     userID = session['userID']
+    # checks if the user has enough gold to play
     if dbfunctions.getStats(c, userID)['gold'] < 10:
         flash("You do not have enough gold!")
         return redirect(url_for('dashboard'))
+    # takes 10 gold from the user
     dbfunctions.updateStats(c, userID, gold = -10)
     db.commit()
+    # generates 3 random numbers between that are either 0 and 1 and 3 random characters
     rand1 = random.randint(0, 1)
     rand2 = random.randint(0, 1)
     rand3 = random.randint(0, 1)
@@ -244,11 +249,14 @@ def lottoResults():
     randCharID2 = random.randint(1, charCount)
     randCharID3 = random.randint(1, charCount)
     charName = dbfunctions.getName(c, randCharID1)
+    # checks if the random numbers are equal, and displays results for if the user won
     if rand1 == rand2 == rand3:
         return render_template('lottoresults.html', charID = randCharID1, charName = charName, img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID1), img3 = dbfunctions.getImage(c, randCharID1), isWinner = True)
+    # displays results for if the user lost
     else:
         return render_template('lottoresults.html', img1 = dbfunctions.getImage(c, randCharID1), img2 = dbfunctions.getImage(c, randCharID2), img3 = dbfunctions.getImage(c, randCharID3), isWinner = False)
 
+# switches a users character after the lotto, if chosen
 @app.route("/lottoswitch", methods=["POST"])
 @login_required
 def lottoSwitch():
@@ -256,21 +264,26 @@ def lottoSwitch():
     charID = request.form['charID']
     charName = request.form['charName']
     charImg = request.form['charImg']
+    # adds new character, switches current character, and updates stats of user
     dbfunctions.addChar(c, userID, charID, charName, charImg)
     dbfunctions.switchChar(c, userID, charID, charName, charImg)
     dbfunctions.updateStats(c, userID, luck = 5, xp = 50)
     db.commit()
+    # checks if the user leveled up to display level up alert on the dashboard
     stats = dbfunctions.getStats(c, userID)
     currXP = stats['xp']
     leveledUp = dbfunctions.levelUp(currXP-50, currXP)
     return render_template("lottoswitch.html", charName = charName, charImg = charImg, luck = stats['luck'], xp = currXP, leveledUp = leveledUp)
 
+# gives a user gold after the lotto, if chosen
 @app.route("/lottogold", methods=["POST"])
 @login_required
 def lottoGold():
     userID = session['userID']
+    # updates stat of user
     dbfunctions.updateStats(c, userID, gold = 50, luck = 5, xp = 50)
     db.commit()
+    # checks if the user leveled up to display level up alert on the dashboard
     stats = dbfunctions.getStats(c, userID)
     currXP = stats['xp']
     leveledUp = dbfunctions.levelUp(currXP-50, currXP)
