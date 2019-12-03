@@ -139,26 +139,22 @@ def levelUnlock():
 #########################################################
 #                  TRIVIA MINIGAME                      #
 #########################################################
+
+#shuffles the choices up so that the answers are not always the first choice
 def shuffle(q):
     selected_keys = []
     i = 0
     while i < len(q):
-        #current_selection = random.choice(list(q.keys()))
         if list(q.keys())[i] not in selected_keys:
             selected_keys.append(list(q.keys())[i])
             i += 1
     return selected_keys
-
-#dbfunctions.addQuestions(c)
 
 @app.route("/trivia")
 def trivia():
     dbfunctions.createTables(c)
     dbfunctions.addQuestions(c)
     original_questions = dbfunctions.questBank(c)
-    #print(original_questions)
-    #dbfunctions.quest(original_questions)
-    #questions = copy.deepcopy(original_questions)
     questions_shuffled = shuffle(original_questions)
     for i in original_questions.keys():
         random.shuffle(original_questions[i])
@@ -166,11 +162,10 @@ def trivia():
 
 @app.route('/triviaresults', methods=['POST'])
 def triviaresults():
-    userID = session['userID']
     correct = 0;
+    userID = session['userID']
     original_questions = dbfunctions.questBank(c)
     answers = dbfunctions.answerBank(c)
-    #print(original_question)
     if request.method == 'POST':
         for i in original_questions.keys():
             answered = request.form[i]
@@ -179,8 +174,7 @@ def triviaresults():
         original_question = {}
     else:
         return render_template('triviaresults.html', correct = correct, answers = answers)
-        #return '<h1>Correct Answers: <u>'+str(correct)+'</u></h1>'
-    dbfunctions.updateStats(c, userID, intelligence = (correct * 3))
+    dbfunctions.updateStats(c, userID, intelligence = (correct * 3)) # each question correct is +3 to intelligence
     return render_template('triviaresults.html', correct = correct, answers = answers)
 
 #########################################################

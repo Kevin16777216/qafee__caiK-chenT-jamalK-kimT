@@ -117,6 +117,7 @@ def quest(bank):
     #print(bank)
     return bank
 
+# adds questions and choices into the database
 def addQuestions(c):
     og = {}
     og = quest(og)
@@ -124,10 +125,11 @@ def addQuestions(c):
         ques = list(og)[i]
         c.execute('INSERT INTO trivia VALUES (?, ?, ?, ?, ?, ?)', (i, ques, og[ques][0], og[ques][1], og[ques][2], og[ques][3]))
 
+# get the question given the index
 def getQuestion(c, i):
     return c.execute("SELECT questions, one, two, three, four FROM trivia WHERE number = ?", (i, )).fetchone()
 
-# returns the dictionary from the stored informatin
+# returns the dictionary from the stored information
 def questBank(c):
     bank = []
     for i in range(5):
@@ -137,6 +139,7 @@ def questBank(c):
         bankDic[bank[i][0]] = [bank[i][1], bank[i][2], bank[i][3], bank[i][4]]
     return bankDic
 
+# returns the dictionary with the question : [answer]
 def answerBank(c):
     bank = []
     for i in range(5):
