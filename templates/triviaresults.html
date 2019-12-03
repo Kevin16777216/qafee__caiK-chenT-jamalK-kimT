@@ -4,8 +4,6 @@
   <h1 class="bg-info text-center">Intelligence Trivia Results </h1>
   <div class="instruction">
     <p class="text-center"> The following will display the number of questions you answered correct.  </p>
-    <div class = "form-group">
-      <form action = "url_for('triviaresults', original_questions = o)" method='POST'>
         <h1 class="text-center"> {{correct}} / 5 </h1>
         <ol>
           {% for i in answers %}
@@ -15,10 +13,8 @@
           <br>
         </ol>
           <br>
-      </form>
       <div class="my-5 container text-center">
         <a href="/dashboard" class="btn btn-primary btn-lg">Return to Dashboard</a>
       </div>
     </div>
-
 {% endblock %}
