@@ -171,3 +171,7 @@ Fixed HTML symbols and got them to show
 taejoonK -- 2019-12-03 22:53
 Finished with the adjustments for strengthresults.html. Made style consistent with the other minigames.
 Added comments to strength minigame section of app.py.
+
+kevinC -- 2019-12-04 00:07
+Fixed devlog.txt formatting. Changed design doc by adding the trivia table, which is atable used to store trivia questions
+in the trivia minigame. Added final stat changes for each minigame.
