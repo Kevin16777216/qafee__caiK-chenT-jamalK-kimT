@@ -98,7 +98,7 @@ def getCharacters(c, userID):
 
 def getHeroImage(c, charID):
     """Returns the image of a superhero from the SuperHero API provided their character ID."""
-    req = request.Request('https://www.superheroapi.com/api.php/2503373653110667/'+str(charID), headers={'User-Agent': 'Mozilla/5.0'})
+    req = request.Request('https://www.superheroapi.com/api/2503373653110667/'+str(charID), headers={'User-Agent': 'Mozilla/5.0'})
     imagejson = request.urlopen(req).read()
     if json.loads(imagejson)['response'] == 'error':
         return "";
@@ -107,7 +107,7 @@ def getHeroImage(c, charID):
 
 def getHeroName(c, charID):
     """Returns the name of a superhero from the SuperHero API provided their character ID."""
-    req = request.Request('https://www.superheroapi.com/api.php/2503373653110667/'+str(charID), headers={'User-Agent': 'Mozilla/5.0'})
+    req = request.Request('https://www.superheroapi.com/api/2503373653110667/'+str(charID), headers={'User-Agent': 'Mozilla/5.0'})
     namejson = request.urlopen(req).read()
     if json.loads(namejson)['response'] == 'error':
         return "";
