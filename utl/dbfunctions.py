@@ -114,32 +114,29 @@ def getHeroName(c, charID):
     name = json.loads(namejson)['name']
     return name
 
-# makes dictionary from Open Trivia API
 def quest(bank):
+    """Makes dictionary from Open Trivia API"""
     q = request.urlopen("https://opentdb.com/api.php?amount=10&category=18&type=multiple").read()
     for i in range(5):
         count = json.loads(q)['results'][i]
-        #print(count)
-        #print(count['correct_answer'])
         ans = [count['correct_answer']]
         bank[count['question']] = [*ans,*count['incorrect_answers']]
-    #print(bank)
     return bank
 
-# adds questions and choices into the database
 def addQuestions(c):
+    """Adds questions and choices into the database"""
     og = {}
     og = quest(og)
     for i in range(5):
         ques = list(og)[i]
         c.execute('INSERT INTO trivia VALUES (?, ?, ?, ?, ?, ?)', (i, ques, og[ques][0], og[ques][1], og[ques][2], og[ques][3]))
 
-# get the question given the index
 def getQuestion(c, i):
+    """Get the question given the index"""
     return c.execute("SELECT questions, one, two, three, four FROM trivia WHERE number = ?", (i, )).fetchone()
 
-# returns the dictionary from the stored information
 def questBank(c):
+    """Returns the dictionary from the stored information"""
     bank = []
     for i in range(5):
         bank.append(getQuestion(c, i))
@@ -148,8 +145,8 @@ def questBank(c):
         bankDic[bank[i][0]] = [bank[i][1], bank[i][2], bank[i][3], bank[i][4]]
     return bankDic
 
-# returns the dictionary with the question : [answer]
 def answerBank(c):
+    """Returns the dictionary with the question : [answer]"""
     bank = []
     for i in range(5):
         bank.append(getQuestion(c, i))
