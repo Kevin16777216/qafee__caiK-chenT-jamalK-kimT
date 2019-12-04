@@ -11,8 +11,8 @@
   <h1 class="text-center"> {{correct}} / 5 </h1>
   <ol>
     {% for i in answers %}
-    <li> <b style="color: #ff0037"> QUESTION: </b> {{i}}</li>
-    <b style="color: #52eb34"> ANSWER: </b> {{answers[i][0]}}
+    <li> <b style="color: #ff0037"> QUESTION: </b> {{i|safe}}</li>
+    <b style="color: #52eb34"> ANSWER: </b> {{answers[i][0]|safe}}
     {% endfor %}
     <br>
   </ol>
@@ -58,6 +58,10 @@
     <div class="col-sm-2">
       <h3>{{ xp%100 }}/100</h3>
     </div>
+  </div>
+  <div>
+    <img class="d-inline" src="/static/gold.png" width="50" alt="gold" />
+    <h1 class="d-inline">+ {{gold}}</h1>
   </div>
 </div>
 <div class="my-5 container text-center">

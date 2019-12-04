@@ -174,11 +174,11 @@ def triviaresults():
         original_question = {}
     else:
         return render_template('triviaresults.html', correct = correct, answers = answers)
-    dbfunctions.updateStats(c, userID, intelligence = (correct * 3), xp = (correct * 5)) # each question correct is +3 to intelligence
+    dbfunctions.updateStats(c, userID, intelligence = (correct * 3), xp = (correct * 5), gold = (correct * 2)) # each question correct is +3 to intelligence
     stats = dbfunctions.getStats(c, str(userID))
     currXP = stats['xp']
-    leveledUp = dbfunctions.levelUp(currXP-50, currXP)
-    return render_template('triviaresults.html', correct = correct, answers = answers, intelligence = stats['intelligence'], xp = currXP, leveledUp = leveledUp)
+    leveledUp = dbfunctions.levelUp(currXP-(5 * correct), currXP)
+    return render_template('triviaresults.html', correct = correct, answers = answers, intelligence = stats['intelligence'], xp = currXP, leveledUp = leveledUp, gold = (correct * 2))
 
 #########################################################
 #                  STRENGTH MINIGAME                    #
