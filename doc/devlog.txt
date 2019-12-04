@@ -170,4 +170,4 @@ Fixed HTML symbols and got them to show
 
 taejoonK -- 2019-12-03 22:53
 Finished with the adjustments for strengthresults.html. Made style consistent with the other minigames.
-Added comments to strength minigame sectin of app.py.
+Added comments to strength minigame section of app.py.
