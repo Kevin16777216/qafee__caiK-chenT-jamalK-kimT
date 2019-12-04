@@ -166,4 +166,8 @@ caiK -- 2019-12-03 19:53
 Added ability to switch characters
 
 chenT -- 2019-12-03 21:16
-Fixed HTML symbols and got them to show  
+Fixed HTML symbols and got them to show
+
+kimT -- 2019-12-03 22:53
+Finished with the adjustments for strengthresults.html. Made style consistent with the other minigames.
+Added comments to strength minigame sectin of app.py.

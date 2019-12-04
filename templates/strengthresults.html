@@ -3,8 +3,8 @@
 {% block title %}Strength Arena Results{% endblock %}
 
 {% block body %}
-<div class="my-4 container text-center">
-  <h1>Stength Arena Results</h1>
+<div id="title block" class="container my-4 text-center">
+  <h1>Strength Arena Results</h1>
 </div>
 
 <div id="versus" class="container my-5 text-center">
@@ -12,6 +12,8 @@
     <div class="col">
       {% if isWinner %}
       <h3 class="text-warning">Winner</h3>
+      {% elif userResult == heroResult %}
+      <h3>Tie</h3>
       {% else %}
       <h3>Loser</h3>
       {% endif %}
@@ -19,12 +21,11 @@
       <br>
       <h3>{{name}}</h3>
     </div>
-    <div class="col-xs">
-      <h3>Versus</h3>
-    </div>
     <div class="col">
       {% if isWinner %}
       <h3>Loser</h3>
+      {% elif userResult == heroResult %}
+      <h3>Tie</h3>
       {% else %}
       <h3 class="text-warning">Winner</h3>
       {% endif %}
@@ -102,7 +103,11 @@
   <div>
     {% if isWinner %}
     <img class="d-inline" src="/static/gold.png" width="50" alt="gold" />
-    <h1 class="d-inline">Gold +5</h1>
+    <h1 class="d-inline">+5</h1>
+    {% endif %}
+    {% if userResult == heroResult %}
+    <img class="d-inline" src="/static/gold.png" width="50" alt="gold" />
+    <h1 class="d-inline">+2</h1>
     {% endif %}
   </div>
 </div>

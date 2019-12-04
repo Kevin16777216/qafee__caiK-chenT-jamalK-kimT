@@ -190,6 +190,7 @@ randHeroID = 0
 def strength():
     user = dbfunctions.getUser(c,str(session['userID']))
     global randHeroID
+    #generates a random ID for the superhero API.
     randHeroID = random.randint(1, 731)
     hImage = dbfunctions.getHeroImage(c, randHeroID)
     hName = dbfunctions.getHeroName(c, randHeroID)
@@ -201,18 +202,28 @@ def strengthresults():
     userID = session['userID']
     user = dbfunctions.getUser(c,str(userID))
     global randHeroID
+    #generates random rpc numbers for the superheroes
     randRPC = random.randint(1, 3)
+    #retrieves rpc number from user
     userRPC = int(request.form['rpc'])
     hImage = dbfunctions.getHeroImage(c, randHeroID)
     hName = dbfunctions.getHeroName(c, randHeroID)
     winner = False
+    #if statement compares number equivalents of rock paper scissors: 1 is Rock, 2 is Paper, 3 is Scissors.
+    #in the case that you win, gold, as well as more strength and xp, are awarded.
     if (userRPC == 1 and randRPC == 3) or (userRPC == 3 and randRPC == 2) or (userRPC == 2 and randRPC == 1):
         dbfunctions.updateStats(c, userID, strength = 3, xp = 25, gold = 5)
         db.commit()
         winner = True
+    #when you tie, less gold, strength, and xp are awarded.
+    elif userRPC == randRPC:
+        dbfunctions.updateStats(c, userID, strength = 2, xp = 15, gold = 2)
+        db.commit()
+    #when you lose, you only get small boost in strength and xp.
     else:
         dbfunctions.updateStats(c, userID, strength = 1, xp = 10)
         db.commit()
+    #checks to see if user has leveled up.
     stats = dbfunctions.getStats(c, str(userID))
     currXP = stats['xp']
     leveledUp = dbfunctions.levelUp(currXP-50, currXP)
