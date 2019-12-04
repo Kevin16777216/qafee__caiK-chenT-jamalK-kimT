@@ -14,7 +14,7 @@
               <li class="lead">{{i|safe}}</li>
               <div class="form-check">
               {% for j in o[i] %}
-                  <input class ="form-check-input" type='radio' value='{{j}}' name='{{i}}' />
+                  <input required="true" class ="form-check-input" type='radio' value='{{j}}' name='{{i}}' />
                   <label class="form-check-label"> {{j|safe}} </label>
                   <br>
               {% endfor %}
