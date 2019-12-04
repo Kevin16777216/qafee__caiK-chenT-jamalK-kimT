@@ -308,6 +308,22 @@ def lottoGold():
 def collection():
     return render_template('collection.html', characters = dbfunctions.getCharacters(c,session['userID']))
 
+# switches a users character
+@app.route("/switchcharacter", methods=["POST"])
+@login_required
+def characterSwitch():
+    userID = session['userID']
+    charID = request.form['charID']
+    charName = request.form['charName']
+    charImg = request.form['charImg']
+    # switches current character
+    dbfunctions.switchChar(c, userID, charID, charName, charImg)
+    dbfunctions.resetStats(c,userID)
+
+    db.commit()
+    flash("Your character is now " + charName, "success")
+    return redirect(url_for('dashboard'))
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
