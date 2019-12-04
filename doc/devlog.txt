@@ -164,3 +164,6 @@ Fixed styling for strength arena
 
 caiK -- 2019-12-03 19:53
 Added ability to switch characters
+
+chenT -- 2019-12-03 21:16
+Fixed HTML symbols and got them to show  
