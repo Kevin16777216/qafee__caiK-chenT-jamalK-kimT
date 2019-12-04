@@ -226,7 +226,7 @@ def strengthresults():
     #checks to see if user has leveled up.
     stats = dbfunctions.getStats(c, str(userID))
     currXP = stats['xp']
-    leveledUp = dbfunctions.levelUp(currXP-50, currXP)
+    leveledUp = dbfunctions.levelUp(currXP-15, currXP)
     return render_template('strengthresults.html', image = user[5], name = user[4], strength = stats['strength'], xp = stats['xp'], heroImage = hImage, heroName = hName, userResult = userRPC, heroResult = randRPC, isWinner = winner, leveledUp = leveledUp)
 
 #########################################################
