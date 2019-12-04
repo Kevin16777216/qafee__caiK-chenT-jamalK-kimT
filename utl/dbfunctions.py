@@ -22,7 +22,7 @@ def getUserIDByUsername(c,username):
     return c.execute("SELECT userID FROM users WHERE username = ?", (username, )).fetchone()[0]
 
 def getUser(c,userID):
-    """Returns the record in the users table for the provided userID.""" 
+    """Returns the record in the users table for the provided userID."""
     return c.execute("SELECT * FROM users WHERE userID = " + userID).fetchone()
 
 def getXP(c, userID):

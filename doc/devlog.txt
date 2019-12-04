@@ -157,4 +157,8 @@ Added comments to lotto minigame section of app.py.
 Added docstrings to most of the functions in dbfunctions.py.
 
 chenT -- 2019-12-03 9:23
-Added progress bars inside trivia 
+Added progress bars inside trivia
+
+kimT -- 2019-12-03 22:53
+Finished with the adjustments for strengthresults.html. Made style consistent with the other minigames.
+Added comments to strength minigame sectin of app.py.
